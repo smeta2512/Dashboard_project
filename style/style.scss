@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+
+@mixin btn-black {
+    background-color: black;
+    color: white;
+}
+@mixin btn {
+    width: 100px;
+    height: 45px;
+    font-size: 15px;
+    font-family: 'Quicksand', sans-serif;
+    border-radius: 7px;
+    border: none;
+}
+body {
+    font-family: 'Quicksand', sans-serif;
+}
+h1 {
+    color: rgb(189, 122, 189);
+}
+h2 {
+    color: rgb(153, 147, 147);
+}
+h3 {
+    color: 	rgb(195, 226, 216);
+}
+.btn-today {
+    @include btn;
+}
+.btn-share {
+    @include btn;
+    @include btn-black;
+}
