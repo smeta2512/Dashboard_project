@@ -1,0 +1,53 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
+body {
+  width: 100%;
+  height: 100%;
+  font-family: "Quicksand", sans-serif;
+}
+
+h1 {
+  color: rgb(189, 122, 189);
+}
+
+h2 {
+  color: rgb(153, 147, 147);
+}
+
+h3 {
+  color: rgb(195, 226, 216);
+}
+
+.btn-today {
+  width: 100px;
+  height: 45px;
+  font-size: 15px;
+  font-family: "Quicksand", sans-serif;
+  border-radius: 7px;
+  border: none;
+}
+
+.btn-share {
+  width: 100px;
+  height: 45px;
+  font-size: 15px;
+  font-family: "Quicksand", sans-serif;
+  border-radius: 7px;
+  border: none;
+  background-color: black;
+  color: white;
+}
+
+.main {
+  width: 100%;
+  border: solid black 2px;
+}
+.main .main__todo {
+  width: 30%;
+  height: 100%;
+  border: solid black 2px;
+}
+.main .main__chart {
+  width: 70%;
+  height: 100%;
+  border: solid black 2px;
+}/*# sourceMappingURL=style.css.map */

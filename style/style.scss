@@ -13,6 +13,7 @@
     border: none;
 }
 body {
+    width: 90%;
     font-family: 'Quicksand', sans-serif;
 }
 h1 {
@@ -30,4 +31,13 @@ h3 {
 .btn-share {
     @include btn;
     @include btn-black;
+}
+.main {
+    display: flex;
+    .main__todo {
+        width: 30%;
+    }
+    .main__chart {
+        width: 70%;
+    }
 }
