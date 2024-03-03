@@ -12,30 +12,71 @@
     border-radius: 7px;
     border: none;
 }
+@mixin violet {
+    color: rgb(189, 122, 189);
+}
+@mixin grey {
+    color: rgb(153, 147, 147);
+}
+@mixin sage {
+    color: 	rgb(195, 226, 216);
+}
 body {
     width: 90%;
     font-family: 'Quicksand', sans-serif;
-}
-h1 {
-    color: rgb(189, 122, 189);
-}
-h2 {
-    color: rgb(153, 147, 147);
-}
-h3 {
-    color: 	rgb(195, 226, 216);
-}
-.btn-today {
-    @include btn;
-}
-.btn-share {
-    @include btn;
-    @include btn-black;
 }
 .main {
     display: flex;
     .main__todo {
         width: 30%;
+        .main__todo-title {
+            padding: 20px 0;
+            font-size: 20px;
+            @include grey;
+        }
+        .title-new {
+            @include violet;
+        }
+        .main__todo-task {
+            font-size: 15px;
+            font-family: 'Quicksand', sans-serif;
+            height: 40px;
+            border-radius: 7px;
+            border: solid 1px rgb(153, 147, 147);
+        }
+        .main__todo-btn {
+            @include btn;
+        }
+        .btn-delete {
+            @include btn-black;
+        }
+        .main__todo-message {
+            padding-top: 20px;
+            font-size: 20px;
+        }
+        .main__todo-list {
+            padding-top: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            font-size: 15px;
+            margin-bottom: 40px;
+            width: 60%;
+            
+            .main__todo-bullet {
+                display: flex;
+                justify-content: space-between;
+                .checkbox {
+                    accent-color:  rgb(189, 122, 189);
+                    width: 15px;
+                    height: 15px;
+                    align-self: flex-end;
+                }
+                .bullet {
+                    width: 50%;
+                }
+            }
+        }
     }
     .main__chart {
         width: 70%;
