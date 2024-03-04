@@ -90,7 +90,7 @@ form.onsubmit = function (e) {
         return response.json()
     }).then((data) => {
         console.log (data);
-        
+        console.log (data);
         if (data.error) {
         // Если есть ошибка - выводим ее
         
