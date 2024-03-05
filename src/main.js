@@ -134,3 +134,35 @@ form.onsubmit = function (e) {
 
 
 }
+
+
+// joke section
+
+document.addEventListener('DOMContentLoaded', getJoke);
+
+function getJoke() {
+    const apis = [
+        'https://geek-jokes.sameerkumar.website/api?format=json',
+        'https://icanhazdadjoke.com',
+        'https://official-joke-api.appspot.com/random_joke'
+    ];
+
+    const randomApi = apis[Math.floor(Math.random() * apis.length)];
+
+    fetch(randomApi, {
+        headers: {
+            'Accept': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        let joke = '';
+        if (data.joke) {
+            joke = data.joke;
+        } else if (data.setup) {
+            joke = `${data.setup} ${data.punchline}`;
+        }
+        document.getElementById('joke').innerText = joke;
+    })
+    .catch(error => console.error('Ошибка:', error));
+}
