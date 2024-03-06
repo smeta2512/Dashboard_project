@@ -166,3 +166,61 @@ function getJoke() {
     })
     .catch(error => console.error('Ошибка:', error));
 }
+
+
+//currency
+function CBR_XML_Daily_Ru(rates) {
+        function trend(current, previous) {
+          if (current > previous) return " ▲";
+          if (current < previous) return " ▼";
+          return "";
+        }
+
+        let USDrate = rates.Valute.USD.Value.toFixed(4).replace(".", ",");
+        let USD = document.getElementById("USD");
+        USD.innerHTML = USD.innerHTML.replace("00,0000", USDrate);
+        USD.innerHTML += trend(
+          rates.Valute.USD.Value,
+          rates.Valute.USD.Previous
+        );
+
+        let EURrate = rates.Valute.EUR.Value.toFixed(4).replace(".", ",");
+        let EUR = document.getElementById("EUR");
+        EUR.innerHTML = EUR.innerHTML.replace("00,0000", EURrate);
+        EUR.innerHTML += trend(
+          rates.Valute.EUR.Value,
+          rates.Valute.EUR.Previous
+        );
+
+        let CADrate = rates.Valute.CAD.Value.toFixed(4).replace(".", ",");
+        let CAD = document.getElementById("CAD");
+        CAD.innerHTML = CAD.innerHTML.replace("00,0000", CADrate);
+        CAD.innerHTML += trend(
+          rates.Valute.CAD.Value,
+          rates.Valute.CAD.Previous
+        );
+
+        let GBPrate = rates.Valute.GBP.Value.toFixed(4).replace(".", ",");
+        let GBP = document.getElementById("GBP");
+        GBP.innerHTML = GBP.innerHTML.replace("00,0000", GBPrate);
+        GBP.innerHTML += trend(
+          rates.Valute.GBP.Value,
+          rates.Valute.GBP.Previous
+        );
+
+        let CNYrate = rates.Valute.CNY.Value.toFixed(4).replace(".", ",");
+        let CNY = document.getElementById("CNY");
+        CNY.innerHTML = CNY.innerHTML.replace("00,0000", CNYrate);
+        CNY.innerHTML += trend(
+          rates.Valute.CNY.Value,
+          rates.Valute.CNY.Previous
+        );
+
+        let JPYrate = rates.Valute.JPY.Value.toFixed(4).replace(".", ",");
+        let JPY = document.getElementById("JPY");
+        JPY.innerHTML = JPY.innerHTML.replace("00,0000", JPYrate);
+        JPY.innerHTML += trend(
+          rates.Valute.JPY.Value,
+          rates.Valute.JPY.Previous
+        );
+      }
