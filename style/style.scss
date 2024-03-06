@@ -200,3 +200,24 @@ body {
   .weather-btn {
     @include btn;
   }
+
+  // joke section
+
+  .ilmira {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: #e3f1f6; 
+
+    .joke-container {
+       
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+
+        p {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 16px;
+            color: rgb(100, 100, 100); 
+        }
+    }
+}
