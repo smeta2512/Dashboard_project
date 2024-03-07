@@ -21,6 +21,10 @@
 @mixin sage {
     color: 	rgb(195, 226, 216);
 }
+@mixin curr {
+    border-bottom: thin dashed gray;
+    padding: 1%;
+}
 body {
     width: 90%;
     font-family: 'Quicksand', sans-serif;
@@ -221,3 +225,30 @@ body {
         }
     }
 }
+
+//currency
+.currency {
+    width: 20%;
+    border: medium solid rgb(196, 141, 173);
+    border-radius: 20%;
+    padding: 1%;
+        .currency__USD {
+             @include curr;
+        }
+        .currency__EUR {
+            @include curr;
+        }
+        .currency__CAD {
+            @include curr;
+        }
+        .currency__GBP {
+            @include curr;
+        }
+        .currency__CNY {
+            @include curr;
+        }
+        .currency__JPY {
+            @include curr;
+        }
+    }
+
