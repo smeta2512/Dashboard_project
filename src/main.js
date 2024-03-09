@@ -3,8 +3,6 @@
 const message = document.querySelector('.main__todo-message');
 const taskListContainer = document.querySelector('.main__todo-list');
 let taskList = [];
-//let unchecked = [];
-//let checked = [];
 
 //show to-do list onload
 
@@ -79,8 +77,7 @@ function renderChecked(element) {
     localStorage.setItem('taskList', JSON.stringify(taskList));
 }
 
-//doughnut-chart for the to-do list    
-
+//doughnut-chart (progress)    
 
 import Chart from 'chart.js/auto';
 
