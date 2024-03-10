@@ -66,15 +66,17 @@ const elementId = element.id;
 const arrCards = taskList.map((item) => {
     if (item.id == elementId) {
         if (item.check) {
-            item.check = false;
-            return item;
-        }   item.check = true;
-            return item;
+        item.check = false;
+        return item;
+    }
+        item.check = true;
+        return item;
     }
     return item;
-});
-    taskList = arrCards;
-    localStorage.setItem("taskList", JSON.stringify(taskList));
+    });
+
+taskList = arrCards;
+localStorage.setItem("taskList", JSON.stringify(taskList));
 }
 
 //doughnut-chart (progress)
