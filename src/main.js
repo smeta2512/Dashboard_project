@@ -60,6 +60,7 @@ function showChecked(event) {
 
 document.addEventListener("change", showChecked);
 
+
 function renderChecked(element) {
   const elementId = element.id;
   const arrCards = taskList.map((item) => {
@@ -67,6 +68,9 @@ function renderChecked(element) {
       if (item.check) {
         item.check = false;
         return item;
+    })
+    taskList = arrCards;
+    localStorage.setItem('taskList', JSON.stringify(taskList));
       }
       item.check = true;
       return item;
@@ -80,25 +84,34 @@ function renderChecked(element) {
 
 //doughnut-chart (progress)
 
-import Chart from "chart.js/auto";
+
+import Chart from 'chart.js/auto';
 
 (async function showDoughnutChart() {
-  const data = {
-    labels: ["Done", "To Do"],
-    datasets: [
-      {
-        label: "My First Dataset",
-        data: [1, 3],
-        backgroundColor: ["rgb(195, 226, 216)", "rgb(153, 147, 147)"],
-        hoverOffset: 4,
-      },
-    ],
-  };
-  new Chart(document.querySelector(".doughnut"), {
-    type: "doughnut",
-    data: data,
-  });
-});
+
+    const data = {
+        labels: [
+            'Done',
+            'To Do'
+        ],
+        datasets: [{
+            label: 'My First Dataset',
+            data: [1, 
+            2],
+            backgroundColor: [
+                'rgb(195, 226, 216)',
+                'rgb(153, 147, 147)'
+            ],
+            hoverOffset: 4
+        }]
+    };
+    new Chart (
+        document.querySelector('.doughnut'), 
+        {
+            type: 'doughnut',
+            data: data,
+        });
+    })();
 
 //delete todo list
 const clearBtn = document.querySelector(".btn-delete");
