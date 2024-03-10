@@ -29,25 +29,25 @@ document.addEventListener("DOMContentLoaded", showListOnload);
 const addBtn = document.querySelector(".btn-add");
 
 function addTask() {
-  const taskInput = document.getElementById("task");
-  let taskValue = taskInput.value;
-  message.innerText = "";
-  message.classList.remove("main__todo-message");
-  if (taskValue !== "") {
-    const id = Math.floor(Math.random() * 100);
-    document.getElementById("task").placeholder = "New task";
-    taskList.push({ taskValue, id, check: false });
-    //unchecked.push(taskValue);
-    localStorage.setItem("taskList", JSON.stringify(taskList));
-    //localStorage.setItem('unchecked', JSON.stringify(unchecked));
-    taskListContainer.insertAdjacentHTML(
-      "beforeend",
-      `<div class="main__todo-bullet"><li class="bullet">${taskValue}</li><input type="checkbox" id=${id} class="checkbox" value="${taskValue}"><br></div>`
-    );
-    taskInput.value = "";
-  } else {
-    document.getElementById("task").placeholder = "Add a task!";
-  }
+const taskInput = document.getElementById("task");
+let taskValue = taskInput.value;
+message.innerText = "";
+message.classList.remove("main__todo-message");
+    if (taskValue !== "") {
+        const id = Math.floor(Math.random() * 100);
+        document.getElementById("task").placeholder = "New task";
+        taskList.push({ taskValue, id, check: false });
+        //unchecked.push(taskValue);
+        localStorage.setItem("taskList", JSON.stringify(taskList));
+        //localStorage.setItem('unchecked', JSON.stringify(unchecked));
+        taskListContainer.insertAdjacentHTML(
+        "beforeend",
+        `<div class="main__todo-bullet"><li class="bullet">${taskValue}</li><input type="checkbox" id=${id} class="checkbox" value="${taskValue}"><br></div>`
+        );
+        taskInput.value = "";
+    } else {
+        document.getElementById("task").placeholder = "Add a task!";
+    }
 }
 
 addBtn.addEventListener("click", addTask);
