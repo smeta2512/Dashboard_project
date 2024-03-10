@@ -80,25 +80,25 @@ function renderChecked(element) {
 
 //doughnut-chart (progress)
 
-// import Chart from "chart.js/auto";
+import Chart from "chart.js/auto";
 
-// (async function showDoughnutChart() {
-//   const data = {
-//     labels: ["Done", "To Do"],
-//     datasets: [
-//       {
-//         label: "My First Dataset",
-//         data: [1, 3],
-//         backgroundColor: ["rgb(195, 226, 216)", "rgb(153, 147, 147)"],
-//         hoverOffset: 4,
-//       },
-//     ],
-//   };
-//   new Chart(document.querySelector(".doughnut"), {
-//     type: "doughnut",
-//     data: data,
-//   });
-// });
+(async function showDoughnutChart() {
+  const data = {
+    labels: ["Done", "To Do"],
+    datasets: [
+      {
+        label: "My First Dataset",
+        data: [1, 3],
+        backgroundColor: ["rgb(195, 226, 216)", "rgb(153, 147, 147)"],
+        hoverOffset: 4,
+      },
+    ],
+  };
+  new Chart(document.querySelector(".doughnut"), {
+    type: "doughnut",
+    data: data,
+  });
+});
 
 //delete todo list
 const clearBtn = document.querySelector(".btn-delete");
