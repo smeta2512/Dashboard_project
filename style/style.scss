@@ -21,6 +21,10 @@
 @mixin sage {
     color: 	rgb(195, 226, 216);
 }
+@mixin curr {
+    border-bottom: thin dashed gray;
+    padding: 1%;
+}
 body {
     width: 90%;
     font-family: 'Quicksand', sans-serif;
@@ -76,6 +80,10 @@ body {
                     width: 50%;
                 }
             }
+        }
+        .main__todo-doughnut {
+            padding-top: 20px;
+            max-width: 300px;
         }
     }
     .main__chart {
@@ -213,11 +221,38 @@ body {
     &__joke-container {
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
     }
-    
     &__joke {
       font-family: 'Quicksand', sans-serif;
       font-size: 16px;
       color: rgb(100, 100, 100); 
     }
   }
-  
+}
+
+//currency
+.currency {
+    width: 20%;
+    border: medium solid rgb(196, 141, 173);
+    border-radius: 20%;
+    padding: 1%;
+        .currency__USD {
+             @include curr;
+        }
+        .currency__EUR {
+            @include curr;
+        }
+        .currency__CAD {
+            @include curr;
+        }
+        .currency__GBP {
+            @include curr;
+        }
+        .currency__CNY {
+            @include curr;
+        }
+        .currency__JPY {
+            @include curr;
+        }
+    }
+
+
