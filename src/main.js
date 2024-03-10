@@ -52,11 +52,13 @@ addBtn.addEventListener('click', addTask);
 //count checked and unchecked boxes
 
 
+
 function showChecked(event) {
     renderChecked(event.target);
 }
 
 document.addEventListener('change', showChecked);
+
 
 function renderChecked(element) {
     const elementId = element.id;
@@ -72,12 +74,12 @@ function renderChecked(element) {
         }
         return item;
     })
-
     taskList = arrCards;
     localStorage.setItem('taskList', JSON.stringify(taskList));
 }
 
 //doughnut-chart (progress)    
+
 
 import Chart from 'chart.js/auto';
 
@@ -91,7 +93,7 @@ import Chart from 'chart.js/auto';
         datasets: [{
             label: 'My First Dataset',
             data: [1, 
-                3],
+            2],
             backgroundColor: [
                 'rgb(195, 226, 216)',
                 'rgb(153, 147, 147)'
@@ -106,9 +108,6 @@ import Chart from 'chart.js/auto';
             data: data,
         });
     })();
-
-
-
 
 //delete todo list
 const clearBtn = document.querySelector('.btn-delete');
