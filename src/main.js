@@ -255,4 +255,70 @@ function CBR_XML_Daily_Ru(rates) {
   JPY.innerHTML += trend(rates.Valute.JPY.Value, rates.Valute.JPY.Previous);
 }
 
-//Create items for calendar
+//Calendar
+{
+  //Create items for calendar
+
+  const calendar = document.querySelector(".calendar");
+  const date = document.querySelector(`.date`);
+  const daysContainer = document.querySelector(".days");
+  const prev = document.querySelector(".prev");
+  const next = document.querySelector(".next");
+  const todayButton = document.querySelector(`.today-btn`);
+
+  //create today date
+
+  let today = new Date();
+  let activeDay;
+  let month = today.getMonth();
+  let year = today.getFullYear();
+  const months = [
+    "Январь",
+    "Февраль",
+    "Март",
+    "Апрель",
+    "Май",
+    "Июнь",
+    "Июль",
+    "Август",
+    "Сентябрь",
+    "Октябрь",
+    "Ноябрь",
+    "Декабрь",
+  ];
+
+  //current month
+  function currentMonth() {
+    date.innerHTML = months[month] + " " + year;
+  }
+  currentMonth();
+
+  //prev month
+  prev.addEventListener(`click`, function () {
+    month = month - 1;
+    if (month < 0) {
+      year = year - 1;
+      month = 11;
+    }
+    currentMonth();
+  });
+
+  //next month
+  next.addEventListener(`click`, function () {
+    month = month + 1;
+    if (month > 11) {
+      year = year + 1;
+      month = 0;
+    }
+    currentMonth();
+  });
+
+  //today button
+  todayButton.addEventListener(`click`, function () {
+    month = today.getMonth();
+    year = today.getFullYear();
+    currentMonth();
+  });
+
+  //end calendar
+}
