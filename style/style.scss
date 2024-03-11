@@ -24,6 +24,8 @@
 @mixin curr {
     border-bottom: thin dashed gray;
     padding: 1%;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 15px;
 }
 body {
     width: 90%;
@@ -231,26 +233,26 @@ body {
 
 //currency
 .currency {
-    width: 20%;
+    width: 13%;
     border: medium solid rgb(196, 141, 173);
     border-radius: 20%;
     padding: 1%;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 15px;
+    display: flex;
+    flex-direction: column;
+    float: right;
+
         .currency__USD {
              @include curr;
         }
         .currency__EUR {
             @include curr;
         }
-        .currency__CAD {
-            @include curr;
-        }
         .currency__GBP {
             @include curr;
         }
         .currency__CNY {
-            @include curr;
-        }
-        .currency__JPY {
             @include curr;
         }
     }

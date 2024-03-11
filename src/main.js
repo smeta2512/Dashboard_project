@@ -227,40 +227,31 @@ function getJoke() {
 }
 
 //currency
-function CBR_XML_Daily_Ru(rates) {
-  function trend(current, previous) {
-    if (current > previous) return " ▲";
-    if (current < previous) return " ▼";
-    return "";
-  }
+document.addEventListener("DOMContentLoaded", getRates);
 
-  let USDrate = rates.Valute.USD.Value.toFixed(4).replace(".", ",");
-  let USD = document.getElementById("USD");
-  USD.innerHTML = USD.innerHTML.replace("00,0000", USDrate);
-  USD.innerHTML += trend(rates.Valute.USD.Value, rates.Valute.USD.Previous);
+function getRates() {
+  const url = "https://www.cbr-xml-daily.ru/daily_json.js";
 
-  let EURrate = rates.Valute.EUR.Value.toFixed(4).replace(".", ",");
-  let EUR = document.getElementById("EUR");
-  EUR.innerHTML = EUR.innerHTML.replace("00,0000", EURrate);
-  EUR.innerHTML += trend(rates.Valute.EUR.Value, rates.Valute.EUR.Previous);
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      let USDrate = data.Valute.USD.Value;
+      let USD = document.getElementById("USD");
+      USD.innerHTML = USD.innerHTML.replace("00,0000", USDrate);
 
-  let CADrate = rates.Valute.CAD.Value.toFixed(4).replace(".", ",");
-  let CAD = document.getElementById("CAD");
-  CAD.innerHTML = CAD.innerHTML.replace("00,0000", CADrate);
-  CAD.innerHTML += trend(rates.Valute.CAD.Value, rates.Valute.CAD.Previous);
+      let EURrate = data.Valute.EUR.Value;
+      let EUR = document.getElementById("EUR");
+      EUR.innerHTML = EUR.innerHTML.replace("00,0000", EURrate);
 
-  let GBPrate = rates.Valute.GBP.Value.toFixed(4).replace(".", ",");
-  let GBP = document.getElementById("GBP");
-  GBP.innerHTML = GBP.innerHTML.replace("00,0000", GBPrate);
-  GBP.innerHTML += trend(rates.Valute.GBP.Value, rates.Valute.GBP.Previous);
+      let GBPrate = data.Valute.GBP.Value;
+      let GBP = document.getElementById("GBP");
+      GBP.innerHTML = GBP.innerHTML.replace("00,0000", GBPrate);
 
-  let CNYrate = rates.Valute.CNY.Value.toFixed(4).replace(".", ",");
-  let CNY = document.getElementById("CNY");
-  CNY.innerHTML = CNY.innerHTML.replace("00,0000", CNYrate);
-  CNY.innerHTML += trend(rates.Valute.CNY.Value, rates.Valute.CNY.Previous);
-
-  let JPYrate = rates.Valute.JPY.Value.toFixed(4).replace(".", ",");
-  let JPY = document.getElementById("JPY");
-  JPY.innerHTML = JPY.innerHTML.replace("00,0000", JPYrate);
-  JPY.innerHTML += trend(rates.Valute.JPY.Value, rates.Valute.JPY.Previous);
+      let CNYrate = data.Valute.CNY.Value;
+      let CNY = document.getElementById("CNY");
+      CNY.innerHTML = CNY.innerHTML.replace("00,0000", CNYrate);
+    })
+    .catch(error => {
+      console.error('Ошибка: ', error);
+    });
 }
