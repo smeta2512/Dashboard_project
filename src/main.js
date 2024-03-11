@@ -88,7 +88,7 @@ import Chart from "chart.js/auto";
     datasets: [
       {
         label: "My First Dataset",
-        data: [1, 3],
+        data: [1, 2],
         backgroundColor: ["rgb(195, 226, 216)", "rgb(153, 147, 147)"],
         hoverOffset: 4,
       },
@@ -98,7 +98,7 @@ import Chart from "chart.js/auto";
     type: "doughnut",
     data: data,
   });
-});
+})();
 
 //delete todo list
 const clearBtn = document.querySelector(".btn-delete");
@@ -254,3 +254,5 @@ function CBR_XML_Daily_Ru(rates) {
   JPY.innerHTML = JPY.innerHTML.replace("00,0000", JPYrate);
   JPY.innerHTML += trend(rates.Valute.JPY.Value, rates.Valute.JPY.Previous);
 }
+
+//Create items for calendar
