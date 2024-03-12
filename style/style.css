@@ -63,6 +63,10 @@ body {
 .main .main__todo .main__todo-list .main__todo-bullet .bullet {
   width: 50%;
 }
+.main .main__todo .main__todo-doughnut {
+  padding-top: 20px;
+  max-width: 300px;
+}
 .main .main__chart {
   width: 70%;
 }
@@ -183,11 +187,42 @@ body {
   padding: 20px;
   background-color: #e3f1f6;
 }
-.joke-block__container {
+.joke-block__joke-container {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-.joke-block__text {
+.joke-block__joke {
   font-family: "Quicksand", sans-serif;
   font-size: 16px;
   color: rgb(100, 100, 100);
+}
+
+.currency {
+  width: 20%;
+  border: medium solid rgb(196, 141, 173);
+  border-radius: 20%;
+  padding: 1%;
+}
+.currency .currency__USD {
+  border-bottom: thin dashed gray;
+  padding: 1%;
+}
+.currency .currency__EUR {
+  border-bottom: thin dashed gray;
+  padding: 1%;
+}
+.currency .currency__CAD {
+  border-bottom: thin dashed gray;
+  padding: 1%;
+}
+.currency .currency__GBP {
+  border-bottom: thin dashed gray;
+  padding: 1%;
+}
+.currency .currency__CNY {
+  border-bottom: thin dashed gray;
+  padding: 1%;
+}
+.currency .currency__JPY {
+  border-bottom: thin dashed gray;
+  padding: 1%;
 }/*# sourceMappingURL=style.css.map */
