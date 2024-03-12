@@ -7,19 +7,19 @@ let taskList = [];
 //show to-do list onload
 
 function showListOnload() {
-  const taskListString = localStorage.getItem("taskList");
-  if (taskListString != null) {
-    message.innerText = "";
-    message.classList.remove("main__todo-message");
-    const taskListArr = JSON.parse(taskListString);
-    taskList = taskListArr;
+    const taskListString = localStorage.getItem("taskList");
+    if (taskListString != null) {
+        message.innerText = "";
+        message.classList.remove("main__todo-message");
+        const taskListArr = JSON.parse(taskListString);
+        taskList = taskListArr;
 
-    taskListContainer.innerHTML = "";
-    taskList.forEach((item) => {
-      const inputCheck = item.check ? "checked" : "";
-      taskListContainer.innerHTML += `<div class="main__todo-bullet"><li class="bullet">${item.taskValue}</li> <input type="checkbox" id=${item.id} class="checkbox" ${inputCheck} value="${item.taskValue}"></input> <br></div>`;
-    });
-  }
+        taskListContainer.innerHTML = "";
+        taskList.forEach((item) => {
+        const inputCheck = item.check ? "checked" : "";
+        taskListContainer.innerHTML += `<div class="main__todo-bullet"><li class="bullet">${item.taskValue}</li> <input type="checkbox" id=${item.id} class="checkbox" ${inputCheck} value="${item.taskValue}"></input> <br></div>`;
+        });
+    }
 }
 
 document.addEventListener("DOMContentLoaded", showListOnload);
@@ -37,9 +37,7 @@ message.classList.remove("main__todo-message");
         const id = Math.floor(Math.random() * 100);
         document.getElementById("task").placeholder = "New task";
         taskList.push({ taskValue, id, check: false });
-        //unchecked.push(taskValue);
         localStorage.setItem("taskList", JSON.stringify(taskList));
-        //localStorage.setItem('unchecked', JSON.stringify(unchecked));
         taskListContainer.insertAdjacentHTML(
         "beforeend",
         `<div class="main__todo-bullet"><li class="bullet">${taskValue}</li><input type="checkbox" id=${id} class="checkbox" value="${taskValue}"><br></div>`
@@ -55,10 +53,30 @@ addBtn.addEventListener("click", addTask);
 //count checked and unchecked boxes
 
 function showChecked(event) {
-  renderChecked(event.target);
+    renderChecked(event.target);
+}
+
+function checkProgress() {
+    let tasks = JSON.parse(localStorage.getItem('taskList'));      
+    let checked=[];
+    let unchecked=[];
+    if (tasks !== null) {
+        tasks.forEach((task) => {
+            if(task.check === true) {
+                checked.push(task);
+                
+            } else {
+                unchecked.push(task);
+                
+            }
+        })
+        localStorage.setItem('unchecked', JSON.stringify(unchecked));
+        localStorage.setItem('checked', JSON.stringify(checked));
+    }
 }
 
 document.addEventListener("change", showChecked);
+document.addEventListener("change", checkProgress);
 
 
 function renderChecked(element) {
@@ -73,33 +91,54 @@ const arrCards = taskList.map((item) => {
         return item;
     }
     return item;
-    });
-
-taskList = arrCards;
-localStorage.setItem("taskList", JSON.stringify(taskList));
+});
+    taskList = arrCards;
+    
+    localStorage.setItem("taskList", JSON.stringify(taskList));
 }
 
-//doughnut-chart (progress)
-
+//doughnut-chart (progress); for now shows progress onload
 
 import Chart from 'chart.js/auto';
 
+let checkedTasks = JSON.parse(localStorage.getItem('checked'));
+let done = checkedTasks !== null ? checkedTasks.length : 0;
+
+let uncheckedTasks = JSON.parse(localStorage.getItem('unchecked'));
+let toDo = uncheckedTasks !== null ? uncheckedTasks.length : 1;
+
 (async function showDoughnutChart() {
+    const data = {
+    labels: ["Done", "To Do"],
+    datasets: [
+      {
+        label: "My First Dataset",
+        data: [1, 2],
+        backgroundColor: ["rgb(195, 226, 216)", "rgb(153, 147, 147)"],
+        hoverOffset: 4,
+      },
+    ],
+  };
+  new Chart(document.querySelector(".doughnut"), {
+    type: "doughnut",
+    data: data,
+  });
+})();
 
     const data = {
         labels: [
             'Done',
             'To Do'
         ],
-        datasets: [{
-            label: 'My First Dataset',
-            data: [1, 
-            2],
+        datasets: [{ 
+            label: 'Tasks',
+            data: [done, 
+                    toDo],
             backgroundColor: [
                 'rgb(195, 226, 216)',
                 'rgb(153, 147, 147)'
             ],
-            hoverOffset: 4
+            hoverOffset: 2
         }]
     };
     new Chart (
@@ -114,11 +153,11 @@ import Chart from 'chart.js/auto';
 const clearBtn = document.querySelector(".btn-delete");
 
 function deleteTaskList() {
-  if (taskList !== null) {
-    taskListContainer.innerHTML = "";
-    taskList = [];
-    localStorage.removeItem("taskList");
-  }
+    if (taskList !== null) {
+        taskListContainer.innerHTML = "";
+        taskList = [];
+        localStorage.clear();
+    }
 }
 clearBtn.addEventListener("click", deleteTaskList);
 
@@ -133,14 +172,14 @@ const form = document.querySelector("#form");
 const input = document.querySelector("#inputCity");
 
 function removeCard() {
-  const prevCard = document.querySelector(".card");
-  if (prevCard) prevCard.remove();
+    const prevCard = document.querySelector(".card");
+    if (prevCard) prevCard.remove();
 }
 
 //Слушаем отправку формы
 form.onsubmit = function (e) {
   //Отменяем отправку формы
-  e.preventDefault();
+    e.preventDefault();
 
   //Берем значение из инпута, обрезаем пробелы
   let city = input.value.trim();
@@ -254,4 +293,72 @@ function getRates() {
     .catch(error => {
       console.error('Ошибка: ', error);
     });
+}
+
+//Calendar
+{
+  //Create items for calendar
+
+  const calendar = document.querySelector(".calendar");
+  const date = document.querySelector(`.date`);
+  const daysContainer = document.querySelector(".days");
+  const prev = document.querySelector(".prev");
+  const next = document.querySelector(".next");
+  const todayButton = document.querySelector(`.today-btn`);
+
+  //create today date
+
+  let today = new Date();
+  let activeDay;
+  let month = today.getMonth();
+  let year = today.getFullYear();
+  const months = [
+    "Январь",
+    "Февраль",
+    "Март",
+    "Апрель",
+    "Май",
+    "Июнь",
+    "Июль",
+    "Август",
+    "Сентябрь",
+    "Октябрь",
+    "Ноябрь",
+    "Декабрь",
+  ];
+
+  //current month
+  function currentMonth() {
+    date.innerHTML = months[month] + " " + year;
+  }
+  currentMonth();
+
+  //prev month
+  prev.addEventListener(`click`, function () {
+    month = month - 1;
+    if (month < 0) {
+      year = year - 1;
+      month = 11;
+    }
+    currentMonth();
+  });
+
+  //next month
+  next.addEventListener(`click`, function () {
+    month = month + 1;
+    if (month > 11) {
+      year = year + 1;
+      month = 0;
+    }
+    currentMonth();
+  });
+
+  //today button
+  todayButton.addEventListener(`click`, function () {
+    month = today.getMonth();
+    year = today.getFullYear();
+    currentMonth();
+  });
+
+  //end calendar
 }
