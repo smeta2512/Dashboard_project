@@ -1,216 +1,295 @@
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
 
 @mixin btn-black {
-    background-color: black;
-    color: white;
+  background-color: black;
+  color: white;
 }
 @mixin btn {
-    width: 100px;
-    height: 45px;
-    font-size: 15px;
-    font-family: 'Quicksand', sans-serif;
-    border-radius: 7px;
-    border: none;
+  width: 100px;
+  height: 45px;
+  font-size: 15px;
+  font-family: "Quicksand", sans-serif;
+  border-radius: 7px;
+  border: none;
 }
 @mixin violet {
-    color: rgb(189, 122, 189);
+  color: rgb(189, 122, 189);
 }
 @mixin grey {
-    color: rgb(153, 147, 147);
+  color: rgb(153, 147, 147);
 }
 @mixin sage {
-    color: 	rgb(195, 226, 216);
+  color: rgb(195, 226, 216);
 }
 @mixin curr {
-    border-bottom: thin dashed gray;
-    padding: 1%;
+  border-bottom: thin dashed gray;
+  padding: 1%;
 }
 body {
-    width: 90%;
-    font-family: 'Quicksand', sans-serif;
+  width: 90%;
+  font-family: "Quicksand", sans-serif;
 }
 .main {
-    display: flex;
-    .main__todo {
-        width: 30%;
-        .main__todo-title {
-            padding: 20px 0;
-            font-size: 20px;
-            @include grey;
-        }
-        .title-new {
-            @include violet;
-        }
-        .main__todo-task {
-            font-size: 15px;
-            font-family: 'Quicksand', sans-serif;
-            height: 40px;
-            border-radius: 7px;
-            border: solid 1px rgb(153, 147, 147);
-        }
-        .main__todo-btn {
-            @include btn;
-        }
-        .btn-delete {
-            @include btn-black;
-        }
-        .main__todo-message {
-            padding-top: 20px;
-            font-size: 20px;
-        }
-        .main__todo-list {
-            padding-top: 20px;
-            display: flex;
-            flex-direction: column;
-            flex-wrap: nowrap;
-            font-size: 15px;
-            margin-bottom: 40px;
-            width: 60%;
-            
-            .main__todo-bullet {
-                display: flex;
-                justify-content: space-between;
-                .checkbox {
-                    accent-color:  rgb(189, 122, 189);
-                    width: 15px;
-                    height: 15px;
-                    align-self: flex-end;
-                }
-                .bullet {
-                    width: 50%;
-                }
-            }
-        }
-        .main__todo-doughnut {
-            padding-top: 20px;
-            max-width: 300px;
-        }
+  display: flex;
+  .main__todo {
+    width: 30%;
+    .main__todo-title {
+      padding: 20px 0;
+      font-size: 20px;
+      @include grey;
     }
-    .main__chart {
-        width: 70%;
+    .title-new {
+      @include violet;
     }
+    .main__todo-task {
+      font-size: 15px;
+      font-family: "Quicksand", sans-serif;
+      height: 40px;
+      border-radius: 7px;
+      border: solid 1px rgb(153, 147, 147);
+    }
+    .main__todo-btn {
+      @include btn;
+    }
+    .btn-delete {
+      @include btn-black;
+    }
+    .main__todo-message {
+      padding-top: 20px;
+      font-size: 20px;
+    }
+    .main__todo-list {
+      padding-top: 20px;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      font-size: 15px;
+      margin-bottom: 40px;
+      width: 60%;
+
+      .main__todo-bullet {
+        display: flex;
+        justify-content: space-between;
+        .checkbox {
+          accent-color: rgb(189, 122, 189);
+          width: 15px;
+          height: 15px;
+          align-self: flex-end;
+        }
+        .bullet {
+          width: 50%;
+        }
+      }
+    }
+    .main__todo-doughnut {
+      padding-top: 20px;
+      max-width: 300px;
+    }
+  }
+  .main__chart {
+    width: 70%;
+  }
 }
-
-
 
 /* weather */
 
 .weather-header {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .weather-title {
-    margin-bottom: 10px;
-    font-size: 20px;
-    line-height: 52px;
-    @include violet;
+  margin-bottom: 10px;
+  font-size: 20px;
+  line-height: 52px;
+  @include violet;
 }
-  
+
 .form {
-    display: flex;
-    justify-content: space-between;
-    width: 460px;
-    height: 54px;
-    background: #FFFFFF;
-    border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  width: 460px;
+  height: 54px;
+  background: #ffffff;
+  border-radius: 6px;
 }
 
 .input {
-    flex-grow: 1;
-    padding: 15px;
+  flex-grow: 1;
+  padding: 15px;
 
-    font-weight: 300;
-    font-size: 20px;
-    line-height: 1;
-    color: #000000;
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 1;
+  color: #000000;
 }
 
 .card {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    row-gap: 20px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
 
-    padding: 30px;
-    width: 200px;
-    background-color: #FFF;
-    border-radius: 6px;
-    box-shadow: 0px 5px 20px rgba(27, 108, 114, 0.25);
-  
+  padding: 30px;
+  width: 200px;
+  background-color: #fff;
+  border-radius: 6px;
+  box-shadow: 0px 5px 20px rgba(27, 108, 114, 0.25);
 }
-  .card::before {
-    content: "";
-  
-    position: absolute;
-    left: 10px;
-    bottom: -10px;
-    z-index: -1;
-  
-    // width: calc(100%-20px);
-    height: 100%;
-  
-    background: #FFFFFF;
-    box-shadow: 0px 5px 20px rgba(27, 108, 114, 0.25);
-    border-radius: 6px;
-  
-  }
-  
-  .card-city {
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 33px;
-    color: #000000;
-  }
-  
-  .card-city span {
-    display: inline-block;
-    vertical-align: text-top;
+.card::before {
+  content: "";
 
-    padding: 3px 5px;
-    background: #E5464F;
-    border-radius: 6px;
+  position: absolute;
+  left: 10px;
+  bottom: -10px;
+  z-index: -1;
 
-    color: #FFF;
-    font-weight: 500;
-    font-size: 10px;
-    line-height: 1;
-  }
-  
-  .card-weather {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    
-  }
-  
-  .card-value {
-    font-size: 50px;
-    line-height: 1;
-  
-    color: #000000;
-  }
-  
-  .card-value sup {
-    font-size: 50%;
-  }
-  
-  .card-img {
-    width: 55px;
-  }
-  
-  .card-description {
-    font-size: 15px;
-    line-height: 1.2;
-  }
-  .weather-btn {
-    @include btn;
-  }
+  // width: calc(100%-20px);
+  height: 100%;
 
-  // joke section
+  background: #ffffff;
+  box-shadow: 0px 5px 20px rgba(27, 108, 114, 0.25);
+  border-radius: 6px;
+}
 
+.card-city {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 33px;
+  color: #000000;
+}
+
+.card-city span {
+  display: inline-block;
+  vertical-align: text-top;
+
+  padding: 3px 5px;
+  background: #e5464f;
+  border-radius: 6px;
+
+  color: #fff;
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 1;
+}
+
+.card-weather {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-value {
+  font-size: 50px;
+  line-height: 1;
+
+  color: #000000;
+}
+
+.card-value sup {
+  font-size: 50%;
+}
+
+.card-img {
+  width: 55px;
+}
+
+.card-description {
+  font-size: 15px;
+  line-height: 1.2;
+}
+.weather-btn {
+  @include btn;
+}
+
+// joke section
+
+.ilmira {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: #e3f1f6;
+
+  &__joke-container {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  &__joke {
+    font-family: "Quicksand", sans-serif;
+    font-size: 16px;
+    color: rgb(100, 100, 100);
+  }
+}
+
+//currency
+.currency {
+  width: 20%;
+  border: medium solid rgb(196, 141, 173);
+  border-radius: 20%;
+  padding: 1%;
+  .currency__USD {
+    @include curr;
+  }
+  .currency__EUR {
+    @include curr;
+  }
+  .currency__CAD {
+    @include curr;
+  }
+  .currency__GBP {
+    @include curr;
+  }
+  .currency__CNY {
+    @include curr;
+  }
+  .currency__JPY {
+    @include curr;
+  }
+}
+
+//calendar
+.main__calendar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.container {
+  position: relative;
+  margin: 0 auto;
+  padding: 5px;
+  color: #fff;
+  display: flex;
+  border-radius: 10px;
+  background-color: #373c4f;
+}
+
+.calendar {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  color: #878895;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.month {
+  width: 100%;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.2rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
   .ilmira {
     display: flex;
     justify-content: center;
@@ -228,31 +307,50 @@ body {
     }
   }
 
+.weekdays {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
 
-//currency
-.currency {
-    width: 20%;
-    border: medium solid rgb(196, 141, 173);
-    border-radius: 20%;
-    padding: 1%;
-        .currency__USD {
-             @include curr;
-        }
-        .currency__EUR {
-            @include curr;
-        }
-        .currency__CAD {
-            @include curr;
-        }
-        .currency__GBP {
-            @include curr;
-        }
-        .currency__CNY {
-            @include curr;
-        }
-        .currency__JPY {
-            @include curr;
-        }
-    }
+.days {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
 
+.weekdays div {
+  width: 14.28%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.day {
+  width: 14%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #8acedd;
+  border: 1px solid #f5f5f5;
+}
+
+.today {
+  position: relative;
+  font-size: 2rem;
+  color: #fff;
+  background-color: #8acedd;
+}
 
