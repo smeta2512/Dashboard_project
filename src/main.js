@@ -145,7 +145,7 @@ const apiKey = "a60fa55cb3d341dd95d140431240303";
 
 // Элементы на странице
 
-const header = document.querySelector(".weather-header");
+const header = document.querySelector(".weather");
 const form = document.querySelector("#form");
 const input = document.querySelector("#inputCity");
 
