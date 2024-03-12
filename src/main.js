@@ -108,6 +108,22 @@ let uncheckedTasks = JSON.parse(localStorage.getItem('unchecked'));
 let toDo = uncheckedTasks !== null ? uncheckedTasks.length : 1;
 
 (async function showDoughnutChart() {
+    const data = {
+    labels: ["Done", "To Do"],
+    datasets: [
+      {
+        label: "My First Dataset",
+        data: [1, 2],
+        backgroundColor: ["rgb(195, 226, 216)", "rgb(153, 147, 147)"],
+        hoverOffset: 4,
+      },
+    ],
+  };
+  new Chart(document.querySelector(".doughnut"), {
+    type: "doughnut",
+    data: data,
+  });
+})();
 
     const data = {
         labels: [
@@ -250,40 +266,99 @@ function getJoke() {
 }
 
 //currency
-function CBR_XML_Daily_Ru(rates) {
-  function trend(current, previous) {
-    if (current > previous) return " ▲";
-    if (current < previous) return " ▼";
-    return "";
+document.addEventListener("DOMContentLoaded", getRates);
+
+function getRates() {
+  const url = "https://www.cbr-xml-daily.ru/daily_json.js";
+
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      let USDrate = data.Valute.USD.Value;
+      let USD = document.getElementById("USD");
+      USD.innerHTML = USD.innerHTML.replace("00,0000", USDrate);
+
+      let EURrate = data.Valute.EUR.Value;
+      let EUR = document.getElementById("EUR");
+      EUR.innerHTML = EUR.innerHTML.replace("00,0000", EURrate);
+
+      let GBPrate = data.Valute.GBP.Value;
+      let GBP = document.getElementById("GBP");
+      GBP.innerHTML = GBP.innerHTML.replace("00,0000", GBPrate);
+
+      let CNYrate = data.Valute.CNY.Value;
+      let CNY = document.getElementById("CNY");
+      CNY.innerHTML = CNY.innerHTML.replace("00,0000", CNYrate);
+    })
+    .catch(error => {
+      console.error('Ошибка: ', error);
+    });
+}
+
+//Calendar
+{
+  //Create items for calendar
+
+  const calendar = document.querySelector(".calendar");
+  const date = document.querySelector(`.date`);
+  const daysContainer = document.querySelector(".days");
+  const prev = document.querySelector(".prev");
+  const next = document.querySelector(".next");
+  const todayButton = document.querySelector(`.today-btn`);
+
+  //create today date
+
+  let today = new Date();
+  let activeDay;
+  let month = today.getMonth();
+  let year = today.getFullYear();
+  const months = [
+    "Январь",
+    "Февраль",
+    "Март",
+    "Апрель",
+    "Май",
+    "Июнь",
+    "Июль",
+    "Август",
+    "Сентябрь",
+    "Октябрь",
+    "Ноябрь",
+    "Декабрь",
+  ];
+
+  //current month
+  function currentMonth() {
+    date.innerHTML = months[month] + " " + year;
   }
+  currentMonth();
 
-  let USDrate = rates.Valute.USD.Value.toFixed(4).replace(".", ",");
-  let USD = document.getElementById("USD");
-  USD.innerHTML = USD.innerHTML.replace("00,0000", USDrate);
-  USD.innerHTML += trend(rates.Valute.USD.Value, rates.Valute.USD.Previous);
+  //prev month
+  prev.addEventListener(`click`, function () {
+    month = month - 1;
+    if (month < 0) {
+      year = year - 1;
+      month = 11;
+    }
+    currentMonth();
+  });
 
-  let EURrate = rates.Valute.EUR.Value.toFixed(4).replace(".", ",");
-  let EUR = document.getElementById("EUR");
-  EUR.innerHTML = EUR.innerHTML.replace("00,0000", EURrate);
-  EUR.innerHTML += trend(rates.Valute.EUR.Value, rates.Valute.EUR.Previous);
+  //next month
+  next.addEventListener(`click`, function () {
+    month = month + 1;
+    if (month > 11) {
+      year = year + 1;
+      month = 0;
+    }
+    currentMonth();
+  });
 
-  let CADrate = rates.Valute.CAD.Value.toFixed(4).replace(".", ",");
-  let CAD = document.getElementById("CAD");
-  CAD.innerHTML = CAD.innerHTML.replace("00,0000", CADrate);
-  CAD.innerHTML += trend(rates.Valute.CAD.Value, rates.Valute.CAD.Previous);
+  //today button
+  todayButton.addEventListener(`click`, function () {
+    month = today.getMonth();
+    year = today.getFullYear();
+    currentMonth();
+  });
 
-  let GBPrate = rates.Valute.GBP.Value.toFixed(4).replace(".", ",");
-  let GBP = document.getElementById("GBP");
-  GBP.innerHTML = GBP.innerHTML.replace("00,0000", GBPrate);
-  GBP.innerHTML += trend(rates.Valute.GBP.Value, rates.Valute.GBP.Previous);
-
-  let CNYrate = rates.Valute.CNY.Value.toFixed(4).replace(".", ",");
-  let CNY = document.getElementById("CNY");
-  CNY.innerHTML = CNY.innerHTML.replace("00,0000", CNYrate);
-  CNY.innerHTML += trend(rates.Valute.CNY.Value, rates.Valute.CNY.Previous);
-
-  let JPYrate = rates.Valute.JPY.Value.toFixed(4).replace(".", ",");
-  let JPY = document.getElementById("JPY");
-  JPY.innerHTML = JPY.innerHTML.replace("00,0000", JPYrate);
-  JPY.innerHTML += trend(rates.Valute.JPY.Value, rates.Valute.JPY.Previous);
+  //end calendar
 }
