@@ -256,6 +256,7 @@ body {
   justify-content: center;
 }
 
+
 .container {
   position: relative;
   margin: 0 auto;
@@ -289,6 +290,22 @@ body {
   font-weight: 500;
   text-transform: capitalize;
 }
+  .ilmira {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: #e3f1f6; 
+  
+    &__joke-container {
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+    }
+    &__joke {
+      font-family: 'Quicksand', sans-serif;
+      font-size: 16px;
+      color: rgb(100, 100, 100); 
+    }
+  }
 
 .weekdays {
   width: 100%;
@@ -336,3 +353,4 @@ body {
   color: #fff;
   background-color: #8acedd;
 }
+
