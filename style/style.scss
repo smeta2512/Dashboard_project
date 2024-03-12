@@ -24,6 +24,10 @@
 @mixin curr {
   border-bottom: thin dashed gray;
   padding: 1%;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 15px;
+  border-bottom: thin dashed gray;
+  padding: 1%;
 }
 body {
   width: 90%;
@@ -247,7 +251,47 @@ body {
     @include curr;
   }
 }
+//currency
+.currency {
+    width: 13%;
+    border: medium solid rgb(196, 141, 173);
+    border-radius: 20%;
+    padding: 1%;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 15px;
+    display: flex;
+    flex-direction: column;
+    float: right;
 
+        .currency__USD {
+             @include curr;
+        }
+        .currency__EUR {
+            @include curr;
+        }
+        .currency__GBP {
+            @include curr;
+        }
+        .currency__CNY {
+            @include curr;
+        }
+    }
+  .ilmira {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: #e3f1f6; 
+  
+    &__joke-container {
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+    }
+    &__joke {
+      font-family: 'Quicksand', sans-serif;
+      font-size: 16px;
+      color: rgb(100, 100, 100); 
+    }
+  }
 //calendar
 .main__calendar {
   position: relative;
@@ -290,23 +334,6 @@ body {
   font-weight: 500;
   text-transform: capitalize;
 }
-  .ilmira {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    background-color: #e3f1f6; 
-  
-    &__joke-container {
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
-    }
-    &__joke {
-      font-family: 'Quicksand', sans-serif;
-      font-size: 16px;
-      color: rgb(100, 100, 100); 
-    }
-  }
-
 .weekdays {
   width: 100%;
   height: 100px;
@@ -317,7 +344,6 @@ body {
   font-weight: 500;
   text-transform: capitalize;
 }
-
 .days {
   width: 100%;
   display: flex;
