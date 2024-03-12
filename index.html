@@ -9,36 +9,31 @@
     <title>Vite App</title>
   </head>
   <body>
-    <div class="julia">
-      <div class="weather-header">
-        <h2 class="weather-title">Weather forecast</h2>
-
-        <form class="weather-form" id="form">
-            <input id="inputCity" class="weather-input" type="text" placeholder="Enter the city">
-            <button class="weather-btn">Show</button>
-        </form>
+    <header class="header">
+        <div class="weather">
+          <h2 class="weather__title">Weather forecast</h2>
+          <form class="weather__form" id="form">
+              <input id="inputCity" class="weather__input input" type="text" placeholder="Enter the city">
+              <button class="weather__btn">Show</button>
+          </form>
+        </div>
       </div>
-    </div>
-
-    <div class="gilyana">
+      <div class="ilmira">
+        <div class="ilmira__joke-container">
+            <p class="ilmira__joke" id="joke"></p>
+        </div>
+      </div>
       <div class="currency">
-      <div class="currency__USD" id="USD">USD  —  00,0000 rub.</div>
-      <div class="currency__EUR" id="EUR">EUR  —  00,0000 rub.</div>
-      <div class="currency__GBP" id="GBP">GBP  —  00,0000 rub.</div>
-      <div class="currency__CNY" id="CNY">CNY  —  00,0000 rub.</div>
-    </div>
-    </div>
-
-    <div class="ilmira">
-      <div class="ilmira__joke-container">
-          <p class="ilmira__joke" id="joke"></p>
+        <div class="currency__USD" id="USD">USD  —  00,0000 rub.</div>
+        <div class="currency__EUR" id="EUR">EUR  —  00,0000 rub.</div>
+        <div class="currency__GBP" id="GBP">GBP  —  00,0000 rub.</div>
+        <div class="currency__CNY" id="CNY">CNY  —  00,0000 rub.</div>
       </div>
-    </div>
-
+    </header>
     <div class="main">
-      <div class="main__todo anastasia">
+      <div class="main__todo">
         <h2 class="main__todo-title title-new">New Task</h2>
-        <input type="text" name="task" id="task" placeholder="New task" class="main__todo-task"/>
+        <input type="text" name="task" id="task" placeholder="New task" class="main__todo-task input"/>
         <button class="btn-add main__todo-btn">Add</button>
         <h2 class="main__todo-title">ToDo List</h1>
         <div class="main__todo-message">The list is empty.</div>
@@ -54,7 +49,7 @@
             <div class="calendar">
               <div class="month">
                 <i class="fas fa-angle-left prev"></i>
-                 <div class="date"><!--Март 2024--></div> 
+                  <div class="date"><!--Март 2024--></div> 
                 <i class="fas fa-angle-right next"></i>
               </div>
               <div class="weekdays">
