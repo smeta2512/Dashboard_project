@@ -203,21 +203,22 @@ body {
 
   // joke section
 
-  .ilmira {
+  .joke-block {
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 20px;
     background-color: #e3f1f6; 
   
-    &__joke-container {
+    &__container {
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
     }
     
-    &__joke {
+    &__text {
       font-family: 'Quicksand', sans-serif;
       font-size: 16px;
       color: rgb(100, 100, 100); 
     }
   }
+  
   
