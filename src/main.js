@@ -13,7 +13,6 @@ function showListOnload() {
         message.classList.remove("main__todo-message");
         const taskListArr = JSON.parse(taskListString);
         taskList = taskListArr;
-
         taskListContainer.innerHTML = "";
         taskList.forEach((item) => {
         const inputCheck = item.check ? "checked" : "";
@@ -64,10 +63,8 @@ function checkProgress() {
         tasks.forEach((task) => {
             if(task.check === true) {
                 checked.push(task);
-                
             } else {
-                unchecked.push(task);
-                
+                unchecked.push(task);                
             }
         })
         localStorage.setItem('unchecked', JSON.stringify(unchecked));
@@ -77,7 +74,6 @@ function checkProgress() {
 
 document.addEventListener("change", showChecked);
 document.addEventListener("change", checkProgress);
-
 
 function renderChecked(element) {
 const elementId = element.id;
@@ -93,7 +89,6 @@ const arrCards = taskList.map((item) => {
     return item;
 });
     taskList = arrCards;
-    
     localStorage.setItem("taskList", JSON.stringify(taskList));
 }
 
@@ -109,23 +104,6 @@ let toDo = uncheckedTasks !== null ? uncheckedTasks.length : 1;
 
 (async function showDoughnutChart() {
     const data = {
-    labels: ["Done", "To Do"],
-    datasets: [
-      {
-        label: "My First Dataset",
-        data: [1, 2],
-        backgroundColor: ["rgb(195, 226, 216)", "rgb(153, 147, 147)"],
-        hoverOffset: 4,
-      },
-    ],
-  };
-  new Chart(document.querySelector(".doughnut"), {
-    type: "doughnut",
-    data: data,
-  });
-})();
-
-    const data = {
         labels: [
             'Done',
             'To Do'
@@ -135,7 +113,7 @@ let toDo = uncheckedTasks !== null ? uncheckedTasks.length : 1;
             data: [done, 
                     toDo],
             backgroundColor: [
-                'rgb(195, 226, 216)',
+                'rgb(202, 177, 202)',
                 'rgb(153, 147, 147)'
             ],
             hoverOffset: 2
@@ -182,41 +160,41 @@ form.onsubmit = function (e) {
     e.preventDefault();
 
   //Берем значение из инпута, обрезаем пробелы
-  let city = input.value.trim();
-  console.log(city);
+    let city = input.value.trim();
+    console.log(city);
 
   //Делаем запрос на сервер
   //Адрес запроса
-  const url = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}`;
+    const url = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}`;
 
   //Выполняем запрос
 
-  fetch(url)
+    fetch(url)
     .then((response) => {
-      return response.json();
+        return response.json();
     })
     .then((data) => {
-      console.log(data);
-      console.log(data);
-      if (data.error) {
-        // Если есть ошибка - выводим ее
+        console.log(data);
+        console.log(data);
+        if (data.error) {
+            // Если есть ошибка - выводим ее
 
-        //Удаляем предыдущую карточку
-        removeCard();
+            //Удаляем предыдущую карточку
+            removeCard();
 
-        //Отобразить карточку с ошибкой
-        const html = `<div class="card">${data.error.message}</div>`;
-        header.insertAdjacentHTML("afterend", html);
-      } else {
+            //Отобразить карточку с ошибкой
+            const html = `<div class="card">${data.error.message}</div>`;
+            header.insertAdjacentHTML("afterend", html);
+        } else {
         // Если ошибки нет - выводим карточку
 
         //Удаляем предыдущую карточку
-        removeCard();
+            removeCard();
 
         //Отображаем полученные данные в карточке
         // Разметка для карточки
 
-        const html = `<div class="card">
+            const html = `<div class="card">
                         <h2 class="card-city">${data.location.name} <span>${data.location.country}</span></h2>
 
                         <div class="card-weather">
@@ -229,8 +207,8 @@ form.onsubmit = function (e) {
                     </div>`;
 
         //Отображаем карточку на странице
-        header.insertAdjacentHTML("afterend", html);
-      }
+            header.insertAdjacentHTML("afterend", html);
+        }
     });
 };
 
@@ -239,59 +217,59 @@ form.onsubmit = function (e) {
 document.addEventListener("DOMContentLoaded", getJoke);
 
 function getJoke() {
-  const apis = [
-    "https://geek-jokes.sameerkumar.website/api?format=json",
-    "https://icanhazdadjoke.com",
-    "https://official-joke-api.appspot.com/random_joke",
-  ];
+    const apis = [
+        "https://geek-jokes.sameerkumar.website/api?format=json",
+        "https://icanhazdadjoke.com",
+        "https://official-joke-api.appspot.com/random_joke",
+    ];
 
   const randomApi = apis[Math.floor(Math.random() * apis.length)];
 
-  fetch(randomApi, {
-    headers: {
-      Accept: "application/json",
-    },
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      let joke = "";
-      if (data.joke) {
-        joke = data.joke;
-      } else if (data.setup) {
-        joke = `${data.setup} ${data.punchline}`;
-      }
-      document.getElementById("joke").innerText = joke;
+    fetch(randomApi, {
+        headers: {
+        Accept: "application/json",
+        },
     })
-    .catch((error) => console.error("Ошибка:", error));
+        .then((response) => response.json())
+        .then((data) => {
+        let joke = "";
+        if (data.joke) {
+            joke = data.joke;
+        } else if (data.setup) {
+            joke = `${data.setup} ${data.punchline}`;
+        }
+        document.getElementById("joke").innerText = joke;
+        })
+        .catch((error) => console.error("Ошибка:", error));
 }
 
 //currency
 document.addEventListener("DOMContentLoaded", getRates);
 
 function getRates() {
-  const url = "https://www.cbr-xml-daily.ru/daily_json.js";
+    const url = "https://www.cbr-xml-daily.ru/daily_json.js";
 
-  fetch(url)
-    .then(response => response.json())
-    .then(data => {
-      let USDrate = data.Valute.USD.Value;
-      let USD = document.getElementById("USD");
-      USD.innerHTML = USD.innerHTML.replace("00,0000", USDrate);
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+        let USDrate = data.Valute.USD.Value;
+        let USD = document.getElementById("USD");
+        USD.innerHTML = USD.innerHTML.replace("00,0000", USDrate);
 
-      let EURrate = data.Valute.EUR.Value;
-      let EUR = document.getElementById("EUR");
-      EUR.innerHTML = EUR.innerHTML.replace("00,0000", EURrate);
+        let EURrate = data.Valute.EUR.Value;
+        let EUR = document.getElementById("EUR");
+        EUR.innerHTML = EUR.innerHTML.replace("00,0000", EURrate);
 
-      let GBPrate = data.Valute.GBP.Value;
-      let GBP = document.getElementById("GBP");
-      GBP.innerHTML = GBP.innerHTML.replace("00,0000", GBPrate);
+        let GBPrate = data.Valute.GBP.Value;
+        let GBP = document.getElementById("GBP");
+        GBP.innerHTML = GBP.innerHTML.replace("00,0000", GBPrate);
 
-      let CNYrate = data.Valute.CNY.Value;
-      let CNY = document.getElementById("CNY");
-      CNY.innerHTML = CNY.innerHTML.replace("00,0000", CNYrate);
-    })
-    .catch(error => {
-      console.error('Ошибка: ', error);
+        let CNYrate = data.Valute.CNY.Value;
+        let CNY = document.getElementById("CNY");
+        CNY.innerHTML = CNY.innerHTML.replace("00,0000", CNYrate);
+        })
+        .catch(error => {
+        console.error('Ошибка: ', error);
     });
 }
 
@@ -299,66 +277,66 @@ function getRates() {
 {
   //Create items for calendar
 
-  const calendar = document.querySelector(".calendar");
-  const date = document.querySelector(`.date`);
-  const daysContainer = document.querySelector(".days");
-  const prev = document.querySelector(".prev");
-  const next = document.querySelector(".next");
-  const todayButton = document.querySelector(`.today-btn`);
+    const calendar = document.querySelector(".calendar");
+    const date = document.querySelector(`.date`);
+    const daysContainer = document.querySelector(".days");
+    const prev = document.querySelector(".prev");
+    const next = document.querySelector(".next");
+    const todayButton = document.querySelector(`.today-btn`);
 
   //create today date
 
-  let today = new Date();
-  let activeDay;
-  let month = today.getMonth();
-  let year = today.getFullYear();
-  const months = [
-    "Январь",
-    "Февраль",
-    "Март",
-    "Апрель",
-    "Май",
-    "Июнь",
-    "Июль",
-    "Август",
-    "Сентябрь",
-    "Октябрь",
-    "Ноябрь",
-    "Декабрь",
-  ];
+    let today = new Date();
+    let activeDay;
+    let month = today.getMonth();
+    let year = today.getFullYear();
+    const months = [
+        "Январь",
+        "Февраль",
+        "Март",
+        "Апрель",
+        "Май",
+        "Июнь",
+        "Июль",
+        "Август",
+        "Сентябрь",
+        "Октябрь",
+        "Ноябрь",
+        "Декабрь",
+    ];
 
   //current month
-  function currentMonth() {
+function currentMonth() {
     date.innerHTML = months[month] + " " + year;
-  }
-  currentMonth();
+}
+currentMonth();
 
   //prev month
-  prev.addEventListener(`click`, function () {
+prev.addEventListener(`click`, function () {
     month = month - 1;
     if (month < 0) {
-      year = year - 1;
-      month = 11;
+        year = year - 1;
+        month = 11;
     }
     currentMonth();
-  });
+});
 
   //next month
-  next.addEventListener(`click`, function () {
+next.addEventListener(`click`, function () {
     month = month + 1;
     if (month > 11) {
-      year = year + 1;
-      month = 0;
+        year = year + 1;
+        month = 0;
     }
     currentMonth();
-  });
+});
 
   //today button
-  todayButton.addEventListener(`click`, function () {
+todayButton.addEventListener(`click`, function () {
     month = today.getMonth();
     year = today.getFullYear();
     currentMonth();
-  });
+});
 
   //end calendar
 }
