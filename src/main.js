@@ -187,7 +187,7 @@ form.onsubmit = function (e) {
             removeCard();
 
             //Отобразить карточку с ошибкой
-            const html = `<div class="card">${data.error.message}</div>`;
+            const html = `<div class="card">Enter the city</div>`;
             header.insertAdjacentHTML("afterend", html);
         } else {
         // Если ошибки нет - выводим карточку
