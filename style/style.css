@@ -194,35 +194,4 @@ body {
   font-family: "Quicksand", sans-serif;
   font-size: 16px;
   color: rgb(100, 100, 100);
-}
-
-.currency {
-  width: 20%;
-  border: medium solid rgb(196, 141, 173);
-  border-radius: 20%;
-  padding: 1%;
-}
-.currency .currency__USD {
-  border-bottom: thin dashed gray;
-  padding: 1%;
-}
-.currency .currency__EUR {
-  border-bottom: thin dashed gray;
-  padding: 1%;
-}
-.currency .currency__CAD {
-  border-bottom: thin dashed gray;
-  padding: 1%;
-}
-.currency .currency__GBP {
-  border-bottom: thin dashed gray;
-  padding: 1%;
-}
-.currency .currency__CNY {
-  border-bottom: thin dashed gray;
-  padding: 1%;
-}
-.currency .currency__JPY {
-  border-bottom: thin dashed gray;
-  padding: 1%;
 }/*# sourceMappingURL=style.css.map */
