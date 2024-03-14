@@ -7,6 +7,7 @@ let taskList = [];
 //show to-do list onload
 
 function showListOnload() {
+    showDoughnutChart();
     const taskListString = localStorage.getItem("taskList");
     if (taskListString != null) {
         message.innerText = "";
@@ -19,6 +20,7 @@ function showListOnload() {
         taskListContainer.innerHTML += `<div class="main__todo-bullet"><li class="bullet">${item.taskValue}</li> <input type="checkbox" id=${item.id} class="checkbox" ${inputCheck} value="${item.taskValue}"></input> <br></div>`;
         });
     }
+    
 }
 
 document.addEventListener("DOMContentLoaded", showListOnload);
@@ -28,23 +30,24 @@ document.addEventListener("DOMContentLoaded", showListOnload);
 const addBtn = document.querySelector(".btn-add");
 
 function addTask() {
-const taskInput = document.getElementById("task");
-let taskValue = taskInput.value;
-message.innerText = "";
-message.classList.remove("main__todo-message");
-    if (taskValue !== "") {
-        const id = Math.floor(Math.random() * 100);
-        document.getElementById("task").placeholder = "New task";
-        taskList.push({ taskValue, id, check: false });
-        localStorage.setItem("taskList", JSON.stringify(taskList));
-        taskListContainer.insertAdjacentHTML(
-        "beforeend",
-        `<div class="main__todo-bullet"><li class="bullet">${taskValue}</li><input type="checkbox" id=${id} class="checkbox" value="${taskValue}"><br></div>`
-        );
-        taskInput.value = "";
-    } else {
-        document.getElementById("task").placeholder = "Add a task!";
-    }
+    const taskInput = document.getElementById("task");
+    let taskValue = taskInput.value;
+    message.innerText = "";
+    message.classList.remove("main__todo-message");
+        if (taskValue !== "") {
+            const id = Math.floor(Math.random() * 100);
+            document.getElementById("task").placeholder = "New task";
+            taskList.push({ taskValue, id, check: false });
+            localStorage.setItem("taskList", JSON.stringify(taskList));
+            taskListContainer.insertAdjacentHTML(
+            "beforeend",
+            `<div class="main__todo-bullet"><li class="bullet">${taskValue}</li><input type="checkbox" id=${id} class="checkbox" value="${taskValue}"><br></div>`
+            );
+            taskInput.value = "";
+        } else {
+            document.getElementById("task").placeholder = "Add a task!";
+        }
+        checkProgress();
 }
 
 addBtn.addEventListener("click", addTask);
@@ -70,72 +73,73 @@ function checkProgress() {
         localStorage.setItem('unchecked', JSON.stringify(unchecked));
         localStorage.setItem('checked', JSON.stringify(checked));
     }
+    showDoughnutChart();
 }
 
 document.addEventListener("change", showChecked);
 document.addEventListener("change", checkProgress);
 
+//check and uncheck checkboxes
 function renderChecked(element) {
-const elementId = element.id;
-const arrCards = taskList.map((item) => {
-    if (item.id == elementId) {
-        if (item.check) {
-        item.check = false;
+    const elementId = element.id;
+    const arrCards = taskList.map((item) => {
+        if (item.id == elementId) {
+            if (item.check) {
+            item.check = false;
+            return item;
+        }
+            item.check = true;
+            return item;
+        }
         return item;
-    }
-        item.check = true;
-        return item;
-    }
-    return item;
-});
-    taskList = arrCards;
-    localStorage.setItem("taskList", JSON.stringify(taskList));
+    });
+        taskList = arrCards;
+        localStorage.setItem("taskList", JSON.stringify(taskList));
 }
 
-//doughnut-chart (progress); for now shows progress onload
-
+//doughnut-chart (progress); shows progress onload and onclick
 import Chart from 'chart.js/auto';
+let chart = null;
 
-let checkedTasks = JSON.parse(localStorage.getItem('checked'));
-let done = checkedTasks !== null ? checkedTasks.length : 0;
-
-let uncheckedTasks = JSON.parse(localStorage.getItem('unchecked'));
-let toDo = uncheckedTasks !== null ? uncheckedTasks.length : 1;
-
-(async function showDoughnutChart() {
-    const data = {
-        labels: [
-            'Done',
-            'To Do'
-        ],
-        datasets: [{ 
-            label: 'Tasks',
-            data: [done, 
-                    toDo],
-            backgroundColor: [
-                'rgb(202, 177, 202)',
-                'rgb(153, 147, 147)'
+function showDoughnutChart() {
+    let checkedTasks = JSON.parse(localStorage.getItem('checked'));
+    let done = checkedTasks !== null ? checkedTasks.length : 0;
+    let uncheckedTasks = JSON.parse(localStorage.getItem('unchecked'));
+    let toDo = uncheckedTasks !== null ? uncheckedTasks.length : 1;
+    const graph = document.querySelector('.doughnut');
+    if (chart) {
+        chart.destroy();
+    }
+    chart = new Chart (graph, {
+        type: 'doughnut',
+        data: {
+            labels: [
+                'Done',
+                'To Do'
             ],
-            hoverOffset: 2
-        }]
-    };
-    new Chart (
-        document.querySelector('.doughnut'), 
-        {
-            type: 'doughnut',
-            data: data,
-        });
-    })();
+            datasets: [{ 
+                label: 'Tasks',
+                data: [done, 
+                        toDo],
+                backgroundColor: [
+                    'rgb(202, 177, 202)',
+                    'rgb(153, 147, 147)'
+                ],
+                hoverOffset: 2
+            }]
+        },
+    });
+}
 
 //delete todo list
 const clearBtn = document.querySelector(".btn-delete");
-
 function deleteTaskList() {
     if (taskList !== null) {
         taskListContainer.innerHTML = "";
         taskList = [];
         localStorage.clear();
     }
+    showDoughnutChart();
 }
 clearBtn.addEventListener("click", deleteTaskList);
 
