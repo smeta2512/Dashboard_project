@@ -136,31 +136,25 @@ body {
     justify-content: center;
     align-items: center;
     padding: 20px;
-   
-  
-  
     &__container {
-  
-  
-      padding: 10px;
-      max-width: 80%;
-      margin: auto;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      overflow: hidden;
-    }
-   
+        padding: 10px;
+        max-width: 80%;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        overflow: hidden;
+        }
     &__text {
-      font-family: 'Quicksand', sans-serif;
-      font-size: 16px;
-      @include grey;
-      max-height: 200px;
-      margin: 0 10px;
-      word-wrap: break-word;
-    }
-  }
-  
+        font-family: 'Quicksand', sans-serif;
+        font-size: 16px;
+        @include grey;
+        max-height: 200px;
+        margin: 0 10px;
+        word-wrap: break-word;
+        }
+}
+
 //currency
 .currency {
     width: 13%;
