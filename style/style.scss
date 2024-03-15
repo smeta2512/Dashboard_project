@@ -131,21 +131,30 @@ body {
     font-size: 12px;
 }
 // joke section
-.ilmira {
+.joke-block {
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 20px;
-    background-color: #e3f1f6;
-    &__joke-container {
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-    &__joke {
-        font-family: "Quicksand", sans-serif;
+    &__container {
+        padding: 10px;
+        max-width: 80%;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        overflow: hidden;
+        }
+    &__text {
+        font-family: 'Quicksand', sans-serif;
         font-size: 16px;
-        color: rgb(100, 100, 100);
-    }
+        @include grey;
+        max-height: 200px;
+        margin: 0 10px;
+        word-wrap: break-word;
+        }
 }
+
 //currency
 .currency {
     width: 13%;
@@ -290,22 +299,77 @@ body {
     height: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
-}
-.day {
-    width: 14%;
-    height: 50px;
+    
+  }
+  
+  .card-value {
+    font-size: 50px;
+    line-height: 1;
+  
+    color: #000000;
+  }
+  
+  .card-value sup {
+    font-size: 50%;
+  }
+  
+  .card-img {
+    width: 55px;
+  }
+  
+  .card-description {
+    font-size: 15px;
+    line-height: 1.2;
+  }
+  .weather-btn {
+    @include btn;
+  }
+
+  // joke section
+
+  .ilmira {
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
-    color: #8acedd;
-    border: 1px solid #f5f5f5;
-}
-.today {
-    position: relative;
-    font-size: 2rem;
-    color: #fff;
-    background-color: #8acedd;
-}
+    align-items: center;
+    padding: 20px;
+    background-color: #e3f1f6; 
+  
+    &__joke-container {
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+    }
+    &__joke {
+      font-family: 'Quicksand', sans-serif;
+      font-size: 16px;
+      color: rgb(100, 100, 100); 
+    }
+  }
+
+
+//currency
+.currency {
+    width: 20%;
+    border: medium solid rgb(196, 141, 173);
+    border-radius: 20%;
+    padding: 1%;
+        .currency__USD {
+             @include curr;
+        }
+        .currency__EUR {
+            @include curr;
+        }
+        .currency__CAD {
+            @include curr;
+        }
+        .currency__GBP {
+            @include curr;
+        }
+        .currency__CNY {
+            @include curr;
+        }
+        .currency__JPY {
+            @include curr;
+        }
+    }
+
 
