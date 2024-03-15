@@ -157,7 +157,7 @@ body {
 
 //currency
 .currency {
-    width: 13%;
+    width: 10%;
     border: 2px solid rgb(196, 141, 173);
     border-radius: 10px;
     padding: 1%;
@@ -299,77 +299,11 @@ body {
     height: 100%;
     display: flex;
     align-items: center;
-    
-  }
-  
-  .card-value {
-    font-size: 50px;
-    line-height: 1;
-  
-    color: #000000;
-  }
-  
-  .card-value sup {
-    font-size: 50%;
-  }
-  
-  .card-img {
-    width: 55px;
-  }
-  
-  .card-description {
-    font-size: 15px;
-    line-height: 1.2;
-  }
-  .weather-btn {
-    @include btn;
-  }
-
-  // joke section
-
-  .ilmira {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    background-color: #e3f1f6; 
-  
-    &__joke-container {
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
-    }
-    &__joke {
-      font-family: 'Quicksand', sans-serif;
-      font-size: 16px;
-      color: rgb(100, 100, 100); 
-    }
-  }
+}
 
 
-//currency
-.currency {
-    width: 20%;
-    border: medium solid rgb(196, 141, 173);
-    border-radius: 20%;
-    padding: 1%;
-        .currency__USD {
-             @include curr;
-        }
-        .currency__EUR {
-            @include curr;
-        }
-        .currency__CAD {
-            @include curr;
-        }
-        .currency__GBP {
-            @include curr;
-        }
-        .currency__CNY {
-            @include curr;
-        }
-        .currency__JPY {
-            @include curr;
-        }
-    }
+
+
+
 
 
