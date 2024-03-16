@@ -4,6 +4,9 @@ const message = document.querySelector(".main__todo-message");
 const taskListContainer = document.querySelector(".main__todo-list");
 let taskList = [];
 
+const eventsArr = [];
+getEvents();
+
 //show to-do list onload
 
 function showListOnload() {
@@ -11,13 +14,27 @@ function showListOnload() {
   const taskListString = localStorage.getItem("taskList");
   if (taskListString != null) {
     message.innerText = "";
+    const monthsNumber = [
+      "01",
+      "02",
+      "03",
+      "04",
+      "05",
+      "06",
+      "07",
+      "08",
+      "09",
+      "10",
+      "11",
+      "12",
+    ];
     message.classList.remove("main__todo-message");
     const taskListArr = JSON.parse(taskListString);
     taskList = taskListArr;
     taskListContainer.innerHTML = "";
     taskList.forEach((item) => {
       const inputCheck = item.check ? "checked" : "";
-      taskListContainer.innerHTML += `<div class="main__todo-bullet"><li class="bullet">${item.taskValue}</li> <input type="checkbox" id=${item.id} class="checkbox" ${inputCheck} value="${item.taskValue}"></input> <br></div>`;
+      taskListContainer.innerHTML += `<div class="main__todo-bullet"><li class="bullet"> ${item.taskNumberDay}.${monthsNumber[item.taskNumberMonth]}.${item.taskNumberYear} ${item.taskValue}</li> <input type="checkbox" id=${item.id} class="checkbox" ${inputCheck} value="${item.taskValue}"></input> <br></div>`;
     });
   }
 }
@@ -26,23 +43,45 @@ document.addEventListener("DOMContentLoaded", showListOnload);
 
 //add tasks
 
-const addBtn = document.querySelector(".btn-add");
+const addBtn = document.getElementById("btn-add");
 
 function addTask() {
   const taskInput = document.getElementById("task");
+
+  const taskDay = document.getElementById("event-day");
+
   let taskValue = taskInput.value;
+  let eventDay = new Date(addEventDay.value);
+  let taskNumberDay = eventDay.getDate();
+  let taskNumberMonth = eventDay.getMonth();
+  let taskNumberYear = eventDay.getFullYear();
+
+  const monthsNumber = [
+    "01",
+    "02",
+    "03",
+    "04",
+    "05",
+    "06",
+    "07",
+    "08",
+    "09",
+    "10",
+    "11",
+    "12",
+  ];
+
   message.innerText = "";
   message.classList.remove("main__todo-message");
   if (taskValue !== "") {
     const id = Math.floor(Math.random() * 100);
     document.getElementById("task").placeholder = "New task";
-    taskList.push({ taskValue, id, check: false });
+    taskList.push({ taskValue, id, taskNumberDay, taskNumberMonth, taskNumberYear, check: false });
     localStorage.setItem("taskList", JSON.stringify(taskList));
     taskListContainer.insertAdjacentHTML(
       "beforeend",
-      `<div class="main__todo-bullet"><li class="bullet">${taskValue}</li><input type="checkbox" id=${id} class="checkbox" value="${taskValue}"><br></div>`
+      `<div class="main__todo-bullet"><li class="bullet">${eventDay.getDate()}.${monthsNumber[eventDay.getMonth()]}.${eventDay.getUTCFullYear()} ${taskValue}</li><input type="checkbox" id=${id} class="checkbox" value="${taskValue}"><br></div>`
     );
-    taskInput.value = "";
   } else {
     document.getElementById("task").placeholder = "Add a task!";
   }
@@ -125,20 +164,19 @@ function showDoughnutChart() {
   });
 }
 
-//delete todo list
-const clearBtn = document.querySelector(".btn-delete");
-function deleteTaskList() {
-  if (taskList !== null) {
-    taskListContainer.innerHTML = "";
-    taskList = [];
-    localStorage.clear();
-  }
-  showDoughnutChart();
-}
-clearBtn.addEventListener("click", deleteTaskList);
+// //delete todo list
+// const clearBtn = document.querySelector(".btn-delete");
+// function deleteTaskList() {
+//   if (taskList !== null) {
+//     taskListContainer.innerHTML = "";
+//     taskList = [];
+//     localStorage.clear();
+//   }
+//   showDoughnutChart();
+// }
+// clearBtn.addEventListener("click", deleteTaskList);
 
 // Погода
-
 const apiKey = "a60fa55cb3d341dd95d140431240303";
 
 // Элементы на странице
@@ -210,6 +248,7 @@ form.onsubmit = function (e) {
     });
 };
 
+
 // joke section
 
 document.addEventListener("DOMContentLoaded", getJoke);
@@ -240,6 +279,7 @@ function getJoke() {
     })
     .catch((error) => console.error("Ошибка:", error));
 }
+
 
 //currency
 document.addEventListener("DOMContentLoaded", getRates);
@@ -272,22 +312,19 @@ function getRates() {
 }
 
 //Calendar
-
-//Create items for calendar
-
-const calendar = document.querySelector(".calendar");
-const date = document.querySelector(`.date`);
-const daysContainer = document.querySelector(".days");
-const prev = document.querySelector(".prev");
-const next = document.querySelector(".next");
-const todayButton = document.querySelector(`.today-btn`);
-
-//create today date
+const calendar = document.querySelector(".calendar"),
+  date = document.querySelector(".date"),
+  daysContainer = document.querySelector(".days"),
+  prev = document.querySelector(".prev"),
+  next = document.querySelector(".next"),
+  gotoBtn = document.getElementById("goto-btn"),
+  dateInput = document.getElementById("date-input");
 
 let today = new Date();
 let activeDay;
 let month = today.getMonth();
 let year = today.getFullYear();
+
 const months = [
   "Январь",
   "Февраль",
@@ -303,91 +340,313 @@ const months = [
   "Декабрь",
 ];
 
-//current month
-function currentMonth() {
-  date.innerHTML = months[month] + " " + year;
-  initCalendar();
-}
-currentMonth();
-
-//prev month
-prev.addEventListener(`click`, function () {
-  month = month - 1;
-  if (month < 0) {
-    year = year - 1;
-    month = 11;
-  }
-  currentMonth();
-});
-
-//next month
-next.addEventListener(`click`, function () {
-  month = month + 1;
-  if (month > 11) {
-    year = year + 1;
-    month = 0;
-  }
-  currentMonth();
-});
-
-//today button
-todayButton.addEventListener(`click`, function () {
-  month = today.getMonth();
-  year = today.getFullYear();
-  currentMonth();
-});
-
-// add calendar days
 function initCalendar() {
-  const firstDay = new Date(year, month, 1); // первый день текущего месяца
-  const lastDay = new Date(year, month + 1, 0); // последний день текущего месяца
-  const prevLastDay = new Date(year, month, 0); // последний день предыдущего месяца
-  const prevDay = prevLastDay.getDate(); // день недели последнего дня предыдущего месяца
-  const lastDate = lastDay.getDate(); // день недели последнего дня текущего месяца
-  let day = firstDay.getDay(); // день недели первого дня текущего месяца
+  const firstDay = new Date(year, month, 1);
+  const lastDay = new Date(year, month + 1, 0);
+  const prevLastDay = new Date(year, month, 0);
+  const prevDays = prevLastDay.getDate();
+  const lastDate = lastDay.getDate();
+  let day = firstDay.getDay();
   const nextDays = 7 - lastDay.getDay();
-  if (day === 0) {
-    day = 6;
-  };
-  if (day === 1) {
-    day = 0;
-  };
-  if (day === 2) {
-    day = 1;
-  };
-  if (day === 3) {
-    day = 2;
-  };
-  if (day === 4) {
-    day = 3;
-  };
-  if (day === 5) {
-    day = 4;
-  };
-  if (day === 6) {
-    day = 5;
-  };
-  let days = "";
-  for (let i = day; i > 0; i--) {
-    days += `<div class="day prev-date">${prevDay - i + 1}</div>`;
-  };
 
-  const todayNumber = today.getDate();
-  for (let j = 1; j < lastDate + 1; j++) {
-    if (j == todayNumber && month == new Date().getMonth() && year == new Date().getFullYear()) {
-      days += `<div class="day today">${j}</div>`;
-    } else 
-    
-{    days += `<div class="day">${j}</div>`;
-}  }
+  date.innerHTML = months[month] + " " + year;
+
+  let days = "";
+  {
+    if (day === 1) {
+      day = 0;
+    } else
+      if (day === 2) {
+        day = 1;
+      } else
+        if (day === 3) {
+          day = 2;
+        } else
+          if (day === 4) {
+            day = 3;
+          } else
+            if (day === 5) {
+              day = 4;
+            } else
+              if (day === 6) {
+                day = 5;
+              } else {
+                day = 6;
+              };
+  }
+  for (let x = day; x > 0; x--) {
+    days += `<div class="day prev-date">${prevDays - x + 1}</div>`;
+
+  }
+
+  for (let i = 1; i <= lastDate; i++) {
+    activeDay = i;
+    //////////////////////////////////////////////
+    let event = false;
+    eventsArr.forEach((eventObj) => {
+      if (eventObj.day === i && eventObj.month === month + 1 && eventObj.year === year) {
+        event = true;
+      }
+    });
+
+    if (i === new Date().getDate() && year === new Date().getFullYear() && month === new Date().getMonth()) {
+      if (event) {
+        days += `<div class="day today active event">${i}</div>`
+      } else {
+        days += `<div class="day today active">${i}</div>`;
+      }
+    }
+    else {
+      if (event) {
+        days += `<div class="day event">${i}</div>`
+      } else {
+        days += `<div class="day">${i}</div>`;
+      }
+    }
+  }
 
   for (let j = 1; j <= nextDays; j++) {
     if (nextDays == 7) {
       days += ``;
     }
-    else { days += `<div class="day next-date">${j}</div>`; }
+    else {
+      days += `<div class="day next-date">${j}</div>`;
+    }
   }
 
   daysContainer.innerHTML = days;
+  addListner();
 }
-//end calendar
+
+function prevMonth() {
+  month--;
+  if (month < 0) {
+    month = 11;
+    year--;
+  }
+  initCalendar();
+}
+
+function nextMonth() {
+  month++;
+  if (month > 11) {
+    month = 0;
+    year++;
+  }
+  initCalendar();
+}
+
+prev.addEventListener("click", prevMonth);
+next.addEventListener("click", nextMonth);
+
+initCalendar();
+
+date.addEventListener("click", () => {
+  today = new Date();
+  month = today.getMonth();
+  year = today.getFullYear();
+  initCalendar();
+});
+
+dateInput.addEventListener("input", (e) => {
+  dateInput.value = dateInput.value.replace(/[^0-9/]/g, "");
+  if (dateInput.value.length === 2) {
+    dateInput.value += "/";
+  }
+  if (dateInput.value.length > 7) {
+    dateInput.value = dateInput.value.slice(0, 7);
+  }
+  if (e.inputType === "deleteContentBackward") {
+    if (dateInput.value.length === 3) {
+      dateInput.value = dateInput.value.slice(0, 2);
+    }
+  }
+});
+
+gotoBtn.addEventListener("click", gotoDate);
+
+function gotoDate() {
+  const dateArr = dateInput.value.split("/");
+  if (dateArr.length === 2) {
+    if (dateArr[0] > 0 && dateArr[0] < 13 && dateArr[1].length === 4) {
+      month = dateArr[0] - 1;
+      year = dateArr[1];
+      initCalendar();
+      return;
+    }
+  }
+  alert("Некорректная дата");
+}
+
+const addEventTitle = document.getElementById("task"),
+  addEventDay = document.getElementById("event-day"),
+  addEventFrom = document.getElementById("event-time-from"),
+  addEventTo = document.getElementById("event-time-to"),
+  addEventSubmit = document.getElementById("btn-add");
+
+addEventTitle.addEventListener("input", (e) => {
+  addEventTitle.value = addEventTitle.value.slice(0, 60);
+});
+
+addEventFrom.addEventListener("input", (e) => {
+  addEventFrom.value = addEventFrom.value.replace(/[^0-9:]/g, "");
+  if (addEventFrom.value.length === 2) {
+    addEventFrom.value += ":";
+  }
+  if (addEventFrom.value.length > 5) {
+    addEventFrom.value = addEventFrom.value.slice(0, 5);
+  }
+});
+
+addEventTo.addEventListener("input", (e) => {
+  addEventTo.value = addEventTo.value.replace(/[^0-9:]/g, "");
+  if (addEventTo.value.length === 2) {
+    addEventTo.value += ":";
+  }
+  if (addEventTo.value.length > 5) {
+    addEventTo.value = addEventTo.value.slice(0, 5);
+  }
+});
+
+function addListner() {
+  const days = document.querySelectorAll(".day");
+  days.forEach((day) => {
+    day.addEventListener("click", (e) => {
+      updateEvents(Number(e.target.innerHTML));
+      activeDay = Number(e.target.innerHTML);
+      days.forEach((day) => {
+        day.classList.remove("active");
+      });
+      if (e.target.classList.contains("prev-date")) {
+        prevMonth();
+        setTimeout(() => {
+          const days = document.querySelectorAll(".day");
+          days.forEach((day) => {
+            if (
+              !day.classList.contains("prev-date") &&
+              day.innerHTML === e.target.innerHTML
+            ) {
+              day.classList.add("active");
+            }
+          });
+        }, 100);
+      } else if (e.target.classList.contains("next-date")) {
+        nextMonth();
+        setTimeout(() => {
+          const days = document.querySelectorAll(".day");
+          days.forEach((day) => {
+            if (
+              !day.classList.contains("next-date") &&
+              day.innerHTML === e.target.innerHTML
+            ) {
+              day.classList.add("active");
+            }
+          });
+        }, 100);
+      } else {
+        e.target.classList.add("active");
+      }
+    });
+  });
+}
+
+addEventSubmit.addEventListener("click", () => {
+  const eventTitle = addEventTitle.value;
+  const eventDay = new Date(addEventDay.value);
+  const eventTimeFrom = addEventFrom.value;
+  const eventTimeTo = addEventTo.value;
+  if (eventTitle === "" || eventTimeFrom === "" || eventTimeTo === "" || eventDay === "") {
+    alert("Незаполененные поля. Повторите ввод");
+    return;
+  }
+  const timeFromArr = eventTimeFrom.split(":");
+  const timeToArr = eventTimeTo.split(":");
+  if (
+    timeFromArr.length !== 2 ||
+    timeToArr.length !== 2 ||
+    timeFromArr[0] > 23 ||
+    timeFromArr[1] > 59 ||
+    timeToArr[0] > 23 ||
+    timeToArr[1] > 59
+  ) {
+    alert("Неверный формат времени");
+    return;
+  }
+  const newEvent = {
+    day: eventDay.getDate(),
+    month: eventDay.getMonth() + 1,
+    year: eventDay.getFullYear(),
+    events: [
+      {
+        title: eventTitle,
+        time: eventTimeFrom + "-" + eventTimeTo,
+      },
+    ],
+  };
+  updateEvents(activeDay);
+  eventsArr.push(newEvent);
+  saveEvents();
+  initCalendar();
+  addEventTitle.value = "";
+  addEventDay.value = "";
+  addEventFrom.value = "";
+  addEventTo.value = "";
+});
+
+function saveEvents() {
+  localStorage.setItem("events", JSON.stringify(eventsArr));
+}
+
+function getEvents() {
+  if (localStorage.getItem("events") === null) {
+    return;
+  }
+  eventsArr.push(...JSON.parse(localStorage.getItem("events")));
+}
+
+function updateEvents(date) {
+  const currentTask = document.getElementById(`current-task`);
+  let events = "";
+
+  const monthes = [
+    "января",
+    "февраля",
+    "марта",
+    "апреля",
+    "мая",
+    "июня",
+    "июля",
+    "августа",
+    "сентября",
+    "октября",
+    "ноября",
+    "декабря",
+  ];
+
+  eventsArr.forEach((event) => {
+    if (date === event.day && month + 1 === event.month && year === event.year) {
+      event.events.forEach((event) => {
+        events += `${date} ${monthes[month]} ${year} ${event.title} ${event.time}<br>`;
+      });
+      currentTask.innerHTML = events;
+    }
+  });
+  if (events === "") {
+    events = ``;
+    currentTask.innerHTML = events;
+  };
+  saveEvents();
+}
+
+//delete todo list
+const clearBtn = document.querySelector(".btn-delete");
+function deleteTaskList() {
+  if (taskList !== null) {
+    taskListContainer.innerHTML = "";
+    taskList = [];
+    localStorage.clear();
+  }
+  showDoughnutChart();
+  location.reload();
+}
+clearBtn.addEventListener("click", deleteTaskList);
