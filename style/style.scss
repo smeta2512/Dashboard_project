@@ -277,7 +277,7 @@ body {
     text-transform: capitalize;
 }
 .days {
-    width: 100%;
+    width: 98%;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -306,6 +306,23 @@ body {
     position: relative;
     font-size: 2rem;
     color: #fff;
-    background-color: #8acedd;
+    background-color: #650ef1;
 }
-
+.date-input {
+    font-size: 15px;
+    font-family: "Quicksand", sans-serif;
+    height: 40px;
+    border-radius: 7px;
+    border: solid 1px rgb(153, 147, 147);
+}
+.goto-btn {
+    @include btn;
+ 
+}
+.today-btn {
+    @include btn;
+}
+.prev-date,
+ .next-date {
+  color: #b3b3b3;
+ }
