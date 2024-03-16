@@ -1,14 +1,199 @@
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
 body {
-  width: 90%;
+  width: 100%;
   font-family: "Quicksand", sans-serif;
+  box-sizing: border-box;
+}
+
+.input {
+  font-size: 15px;
+  font-family: "Quicksand", sans-serif;
+  height: 40px;
+  border-radius: 7px;
+  border: solid 1px rgb(153, 147, 147);
+}
+
+.header {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(195, 226, 216);
+}
+
+/* weather */
+.weather {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+}
+.weather .weather__title {
+  margin-bottom: 10px;
+  font-size: 20px;
+  line-height: 52px;
+  color: rgb(189, 122, 189);
+}
+.weather .weather__form {
+  display: flex;
+  justify-content: space-between;
+  max-width: 280px;
+  gap: 3px;
+  border-radius: 6px;
+}
+.weather .weather__form .weather__btn {
+  width: 100px;
+  height: 45px;
+  font-size: 15px;
+  font-family: "Quicksand", sans-serif;
+  border-radius: 7px;
+  border: none;
+  cursor: pointer;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  height: 90px;
+  width: 150px;
+  background-color: #fff;
+  border-radius: 6px;
+  box-shadow: 0px 5px 20px rgba(27, 108, 114, 0.25);
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  left: 10px;
+  bottom: -10px;
+  z-index: -1;
+  height: 100%;
+  background: #ffffff;
+  box-shadow: 0px 5px 20px rgba(27, 108, 114, 0.25);
+  border-radius: 6px;
+}
+
+.card-city {
+  font-weight: 500;
+  font-size: 15px;
+  color: #000000;
+}
+
+.card-city span {
+  display: inline-block;
+  vertical-align: text-top;
+  padding: 3px 5px;
+  background: #e5464f;
+  border-radius: 6px;
+  color: #fff;
+  font-weight: 500;
+  font-size: 9px;
+  line-height: 1;
+}
+
+.card-weather {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-value {
+  font-size: 30px;
+  line-height: 1;
+  color: #000000;
+}
+
+.card-value sup {
+  font-size: 50%;
+}
+
+.card-img {
+  width: 50px;
+}
+
+.card-description {
+  font-size: 12px;
+}
+
+.joke-block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+.joke-block__container {
+  padding: 10px;
+  max-width: 80%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+.joke-block__text {
+  font-family: "Quicksand", sans-serif;
+  font-size: 16px;
+  color: rgb(153, 147, 147);
+  max-height: 200px;
+  margin: 0 10px;
+  word-wrap: break-word;
+}
+
+.currency {
+  width: 13%;
+  border: 2px solid rgb(196, 141, 173);
+  border-radius: 10px;
+  padding: 1%;
+  font-family: "Quicksand", sans-serif;
+  font-size: 15px;
+  color: rgb(140, 133, 133);
+  display: flex;
+  flex-direction: column;
+  float: right;
+}
+.currency .currency__USD {
+  border-bottom: thin dashed gray;
+  padding: 1%;
+  font-family: "Quicksand", sans-serif;
+  font-size: 15px;
+  border-bottom: thin dashed gray;
+  padding: 1%;
+}
+.currency .currency__EUR {
+  border-bottom: thin dashed gray;
+  padding: 1%;
+  font-family: "Quicksand", sans-serif;
+  font-size: 15px;
+  border-bottom: thin dashed gray;
+  padding: 1%;
+}
+.currency .currency__GBP {
+  border-bottom: thin dashed gray;
+  padding: 1%;
+  font-family: "Quicksand", sans-serif;
+  font-size: 15px;
+  border-bottom: thin dashed gray;
+  padding: 1%;
+}
+.currency .currency__CNY {
+  border-bottom: thin dashed gray;
+  padding: 1%;
+  font-family: "Quicksand", sans-serif;
+  font-size: 15px;
+  border-bottom: thin dashed gray;
+  padding: 1%;
 }
 
 .main {
   display: flex;
+  box-sizing: border-box;
 }
 .main .main__todo {
   width: 30%;
+  padding: 10px;
 }
 .main .main__todo .main__todo-title {
   padding: 20px 0;
@@ -18,13 +203,6 @@ body {
 .main .main__todo .title-new {
   color: rgb(189, 122, 189);
 }
-.main .main__todo .main__todo-task {
-  font-size: 15px;
-  font-family: "Quicksand", sans-serif;
-  height: 40px;
-  border-radius: 7px;
-  border: solid 1px rgb(153, 147, 147);
-}
 .main .main__todo .main__todo-btn {
   width: 100px;
   height: 45px;
@@ -32,6 +210,7 @@ body {
   font-family: "Quicksand", sans-serif;
   border-radius: 7px;
   border: none;
+  cursor: pointer;
 }
 .main .main__todo .btn-delete {
   background-color: black;
@@ -59,96 +238,85 @@ body {
   width: 15px;
   height: 15px;
   align-self: flex-end;
+  cursor: pointer;
 }
 .main .main__todo .main__todo-list .main__todo-bullet .bullet {
   width: 50%;
 }
 .main .main__todo .main__todo-doughnut {
   padding-top: 20px;
-  max-width: 300px;
+  max-width: 230px;
 }
 .main .main__chart {
   width: 70%;
 }
 
-/* weather */
-.weather-header {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.weather-title {
-  margin-bottom: 10px;
-  font-size: 20px;
-  line-height: 52px;
-  color: rgb(189, 122, 189);
-}
-
-.form {
-  display: flex;
-  justify-content: space-between;
-  width: 460px;
-  height: 54px;
-  background: #FFFFFF;
-  border-radius: 6px;
-}
-
-.input {
-  flex-grow: 1;
-  padding: 15px;
-  font-weight: 300;
-  font-size: 20px;
-  line-height: 1;
-  color: #000000;
-}
-
-.card {
+.main__calendar {
   position: relative;
   display: flex;
-  flex-direction: column;
-  row-gap: 20px;
-  padding: 30px;
-  width: 200px;
-  background-color: #FFF;
-  border-radius: 6px;
-  box-shadow: 0px 5px 20px rgba(27, 108, 114, 0.25);
+  align-items: center;
+  justify-content: center;
 }
 
-.card::before {
-  content: "";
-  position: absolute;
-  left: 10px;
-  bottom: -10px;
-  z-index: -1;
-  height: 100%;
-  background: #FFFFFF;
-  box-shadow: 0px 5px 20px rgba(27, 108, 114, 0.25);
-  border-radius: 6px;
-}
-
-.card-city {
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 33px;
-  color: #000000;
-}
-
-.card-city span {
-  display: inline-block;
-  vertical-align: text-top;
-  padding: 3px 5px;
-  background: #E5464F;
-  border-radius: 6px;
-  color: #FFF;
-  font-weight: 500;
-  font-size: 10px;
-  line-height: 1;
-}
-
-.card-weather {
+.container {
+  position: relative;
+  margin: 0 auto;
+  padding: 5px;
+  color: #fff;
   display: flex;
+  border-radius: 10px;
+  background-color: #373c4f;
+}
+
+.calendar {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
   justify-content: space-between;
+  color: #878895;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.month {
+  width: 100%;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.2rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.weekdays {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.days {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.weekdays div {
+  width: 14.28%;
+  height: 100%;
+  display: flex;
   align-items: center;
 }
 
@@ -178,10 +346,12 @@ body {
   font-family: "Quicksand", sans-serif;
   border-radius: 7px;
   border: none;
+  cursor: pointer;
 }
 
 .ilmira {
   display: flex;
+  align-items: center;
   justify-content: center;
   align-items: center;
   padding: 20px;
@@ -197,34 +367,56 @@ body {
 }
 
 .currency {
-  width: 13%;
+  width: 20%;
   border: medium solid rgb(196, 141, 173);
   border-radius: 20%;
   padding: 1%;
-  font-family: "Quicksand", sans-serif;
-  font-size: 15px;
 }
 .currency .currency__USD {
   border-bottom: thin dashed gray;
   padding: 1%;
   font-family: "Quicksand", sans-serif;
   font-size: 15px;
+  border-bottom: thin dashed gray;
+  padding: 1%;
 }
 .currency .currency__EUR {
   border-bottom: thin dashed gray;
   padding: 1%;
   font-family: "Quicksand", sans-serif;
   font-size: 15px;
+  border-bottom: thin dashed gray;
+  padding: 1%;
+}
+.currency .currency__CAD {
+  border-bottom: thin dashed gray;
+  padding: 1%;
+  font-family: "Quicksand", sans-serif;
+  font-size: 15px;
+  border-bottom: thin dashed gray;
+  padding: 1%;
 }
 .currency .currency__GBP {
   border-bottom: thin dashed gray;
   padding: 1%;
   font-family: "Quicksand", sans-serif;
   font-size: 15px;
+  border-bottom: thin dashed gray;
+  padding: 1%;
 }
 .currency .currency__CNY {
   border-bottom: thin dashed gray;
   padding: 1%;
   font-family: "Quicksand", sans-serif;
   font-size: 15px;
+  border-bottom: thin dashed gray;
+  padding: 1%;
+}
+.currency .currency__JPY {
+  border-bottom: thin dashed gray;
+  padding: 1%;
+  font-family: "Quicksand", sans-serif;
+  font-size: 15px;
+  border-bottom: thin dashed gray;
+  padding: 1%;
 }/*# sourceMappingURL=style.css.map */

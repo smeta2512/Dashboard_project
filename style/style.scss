@@ -131,24 +131,33 @@ body {
     font-size: 12px;
 }
 // joke section
-.ilmira {
+.joke-block {
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 20px;
-    background-color: #e3f1f6;
-    &__joke-container {
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-    &__joke {
-        font-family: "Quicksand", sans-serif;
+    &__container {
+        padding: 10px;
+        max-width: 80%;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        overflow: hidden;
+        }
+    &__text {
+        font-family: 'Quicksand', sans-serif;
         font-size: 16px;
-        color: rgb(100, 100, 100);
-    }
+        @include grey;
+        max-height: 200px;
+        margin: 0 10px;
+        word-wrap: break-word;
+        }
 }
+
 //currency
 .currency {
-    width: 13%;
+    width: 10%;
     border: 2px solid rgb(196, 141, 173);
     border-radius: 10px;
     padding: 1%;
@@ -326,3 +335,4 @@ body {
  .next-date {
   color: #b3b3b3;
  }
+
